@@ -1,0 +1,4116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al-Zahara Hospital | Multi-Speciality Care — 19/1/A, Mahadevapura Main Rd, Udayagiri, Mysuru</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    @keyframes toastSlideIn {
+      from {
+        opacity: 0;
+        transform: translateX(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    .animate-modal {
+      animation: modalFadeIn 0.2s ease-out forwards;
+    }
+    .animate-toast {
+      animation: toastSlideIn 0.22s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-teal-700 selection:text-white">
+
+  <!-- ==================== TOP EMERGENCY & PORTAL UTILITY BAR ==================== -->
+  <div class="bg-slate-950 text-slate-200 text-xs border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+        <span class="inline-flex items-center gap-1.5 font-semibold text-emerald-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          24/7 Emergency &amp; Trauma Care
+        </span>
+        <span class="text-slate-600 hidden sm:inline">|</span>
+        <span id="topBarTagline" class="text-slate-300">Multi-Speciality Healthcare • Udayagiri, Mysuru-19</span>
+      </div>
+
+      <div class="flex items-center gap-3 sm:gap-4">
+        <a id="topBarEmergencyPhone" href="tel:08212452007" class="font-semibold text-amber-300 hover:text-amber-200 transition-colors">
+          0821-2452007
+        </a>
+        <span class="text-slate-700">|</span>
+        <button
+          type="button"
+          onclick="handleStaffNavClick(event)"
+          class="text-emerald-300 hover:text-emerald-200 font-semibold transition-colors"
+        >
+          Staff Desk (#staff)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== STICKY PRIMARY NAVIGATION HEADER ==================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+      <!-- Brand Logo -->
+      <a href="#top" class="flex items-center gap-3 min-w-0 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-teal-700 to-emerald-600 text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform shrink-0">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+        </div>
+        <div class="min-w-0">
+          <span class="font-display font-extrabold text-base sm:text-lg tracking-tight text-slate-900 block truncate">
+            Al-Zahara Hospital
+          </span>
+          <span class="text-[11px] font-medium text-teal-700 block truncate">
+            19/1/A, Mahadevapura Main Rd, Udayagiri, Mysuru
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
+        <a href="#specialities" class="hover:text-teal-700 transition-colors">Specialities</a>
+        <a href="#doctors" class="hover:text-teal-700 transition-colors">Our Doctors</a>
+        <a href="#campus" class="hover:text-teal-700 transition-colors">Campus &amp; Map</a>
+        <a href="#contact" class="hover:text-teal-700 transition-colors">Contact</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button
+          type="button"
+          id="headerStaffBtn"
+          onclick="handleStaffNavClick(event)"
+          class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50/80 hover:bg-emerald-100/80 text-emerald-800 border border-emerald-200 text-xs font-semibold transition-all"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span id="headerStaffBtnText">Staff Login</span>
+        </button>
+
+        <button
+          type="button"
+          id="headerAdminBtn"
+          onclick="handleAdminNavClick(event)"
+          class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold transition-all"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <span id="headerAdminBtnText">Admin Login</span>
+        </button>
+
+        <a
+          href="#contact"
+          class="hidden sm:inline-flex items-center px-4 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold shadow-sm transition-all"
+        >
+          Book Appointment
+        </a>
+
+        <button
+          type="button"
+          id="mobileMenuBtn"
+          aria-label="Toggle Menu"
+          class="lg:hidden p-2 rounded-xl text-slate-600 hover:bg-slate-100"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-slate-200 px-4 py-3 space-y-1 text-sm font-semibold text-slate-700">
+      <a href="#specialities" class="mobile-nav-link block py-2 px-3 rounded-xl hover:bg-teal-50 hover:text-teal-800">Specialities</a>
+      <a href="#doctors" class="mobile-nav-link block py-2 px-3 rounded-xl hover:bg-teal-50 hover:text-teal-800">Our Doctors</a>
+      <a href="#campus" class="mobile-nav-link block py-2 px-3 rounded-xl hover:bg-teal-50 hover:text-teal-800">Campus &amp; Map</a>
+      <a href="#contact" class="mobile-nav-link block py-2 px-3 rounded-xl hover:bg-teal-50 hover:text-teal-800">Contact &amp; Appointments</a>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="top" class="relative overflow-hidden bg-gradient-to-b from-teal-950 via-teal-900 to-slate-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-200 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          19/1/A, Mahadevapura Main Rd, Udayagiri, Mysuru 570019
+        </div>
+
+        <h1 class="font-display font-extrabold text-3xl sm:text-5xl lg:text-[3.25rem] leading-[1.12] tracking-tight">
+          Compassionate Clinical Care &amp; Modern Specialities in Mysuru.
+        </h1>
+
+        <p class="text-slate-200/90 text-sm sm:text-base leading-relaxed max-w-2xl">
+          Al-Zahara Hospital brings together experienced specialists, diagnostic support, maternity &amp; surgical care, and round-the-clock emergency response at Udayagiri, Mysuru.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3.5 pt-1">
+          <a
+            href="#contact"
+            class="px-6 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm shadow-lg transition-all"
+          >
+            Book OPD Consultation
+          </a>
+          <a
+            href="#doctors"
+            class="px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-sm transition-all"
+          >
+            Browse Specialists
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10 max-w-lg">
+          <div>
+            <div class="font-display font-extrabold text-2xl sm:text-3xl text-emerald-300">24/7</div>
+            <div class="text-xs text-slate-300 mt-0.5">Emergency &amp; Trauma</div>
+          </div>
+          <div>
+            <div class="font-display font-extrabold text-2xl sm:text-3xl text-emerald-300">8+</div>
+            <div class="text-xs text-slate-300 mt-0.5">Core Specialities</div>
+          </div>
+          <div>
+            <div class="font-display font-extrabold text-2xl sm:text-3xl text-emerald-300">OPD</div>
+            <div class="text-xs text-slate-300 mt-0.5">8:30 AM – 8:00 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Campus Photo Preview Card -->
+      <div class="lg:col-span-5">
+        <div class="bg-white/5 backdrop-blur-md border border-white/15 rounded-3xl p-3.5 shadow-2xl">
+          <div class="relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-800">
+            <img
+              src="image_4f2069.jpg"
+              onerror="this.onerror=null;this.src='https://placehold.co/900x675/0f766e/ffffff?text=Al-Zahara+Hospital+Udayagiri+Mysuru';"
+              alt="Al-Zahara Hospital at 19/1/A, Mahadevapura Main Rd, Udayagiri, Mysuru"
+              class="w-full h-full object-cover cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+              onclick="openPhotoLightbox()"
+            />
+            <button
+              type="button"
+              onclick="openPhotoLightbox()"
+              class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-slate-950/80 hover:bg-slate-950 text-white text-xs font-semibold backdrop-blur-xs transition-colors"
+            >
+              Inspect Photo
+            </button>
+          </div>
+          <div class="pt-3.5 px-1 flex items-center justify-between gap-2 text-xs">
+            <div>
+              <p class="font-bold text-white">Al-Zahara Hospital Campus</p>
+              <p class="text-slate-300">Plus Code: 8MFG+VV Mysuru, Karnataka</p>
+            </div>
+            <a href="#campus" class="px-3 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-semibold shrink-0">
+              View Map
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SPECIALITIES SECTION ==================== -->
+  <section id="specialities" class="py-16 sm:py-20 bg-white border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-teal-700">Clinical Departments</span>
+          <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-slate-900 mt-1">
+            Medical Specialities (<span id="specialityCountLabel">8</span>)
+          </h2>
+          <p class="text-sm text-slate-600 mt-2 max-w-2xl">
+            Explore dedicated departments equipped for accurate diagnosis, outpatient consultations, inpatient recovery, and specialist care.
+          </p>
+        </div>
+      </div>
+
+      <div id="specialitiesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+    </div>
+  </section>
+
+  <!-- ==================== DOCTORS DIRECTORY SECTION ==================== -->
+  <section id="doctors" class="py-16 sm:py-20 bg-slate-50 border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-teal-700">Specialist Team</span>
+          <div class="flex items-center gap-3 mt-1">
+            <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-slate-900">Our Doctors</h2>
+            <span id="doctorsCountBadge" class="px-3 py-1 rounded-full bg-teal-100 text-teal-900 text-xs font-bold">
+              8 Doctors
+            </span>
+          </div>
+          <p id="doctorsFilterSummary" class="text-sm text-slate-600 mt-1.5">
+            Showing all specialist doctors across departments
+          </p>
+        </div>
+
+        <button
+          type="button"
+          id="resetDoctorFilterBtn"
+          class="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 transition-colors"
+        >
+          Reset Filters
+        </button>
+      </div>
+
+      <!-- Search & Department Filter Bar -->
+      <div class="bg-white rounded-3xl border border-slate-200 p-4 sm:p-5 mb-6 shadow-2xs space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+          <div class="md:col-span-7">
+            <label for="doctorSearchInput" class="sr-only">Search doctors</label>
+            <input
+              type="text"
+              id="doctorSearchInput"
+              placeholder="Search by doctor name, qualification, or clinical focus..."
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/60 focus:bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
+            />
+          </div>
+          <div class="md:col-span-5">
+            <label for="doctorSpecialitySelect" class="sr-only">Filter by speciality</label>
+            <select
+              id="doctorSpecialitySelect"
+              class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/60 focus:bg-white text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
+            ></select>
+          </div>
+        </div>
+
+        <div id="doctorFilterPills" class="flex flex-wrap gap-2 pt-1"></div>
+      </div>
+
+      <!-- Doctors Cards Grid -->
+      <div id="doctorsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+
+      <!-- Empty State -->
+      <div id="doctorsEmptyState" class="hidden bg-white rounded-3xl border border-slate-200 p-12 text-center mt-4">
+        <p class="font-display font-bold text-lg text-slate-900">No specialist doctors matched your search</p>
+        <p class="text-sm text-slate-500 mt-1">Try clearing your search keyword or switching to All Departments.</p>
+        <button
+          type="button"
+          onclick="resetDoctorFilters()"
+          class="mt-4 px-5 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold"
+        >
+          Show All Doctors
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CAMPUS LOCATION & GOOGLE MAPS SECTION ==================== -->
+  <section id="campus" class="py-16 sm:py-20 bg-white border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-teal-700">Location &amp; Directions</span>
+          <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-slate-900 mt-1">
+            Campus Location &amp; Live Map
+          </h2>
+          <p class="text-sm text-slate-600 mt-1.5">
+            19/1/A, Mahadevapura Main Rd, Udayagiri, Mysuru, Karnataka 570019 • Plus Code: 8MFG+VV Mysuru, Karnataka
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200 self-start md:self-auto">
+          <button
+            type="button"
+            data-google-view="map"
+            onclick="switchGoogleCampusView('map')"
+            class="google-view-tab px-3.5 py-1.5 rounded-xl text-xs bg-white text-teal-800 font-bold shadow-2xs transition-all"
+          >
+            Map View
+          </button>
+          <button
+            type="button"
+            data-google-view="satellite"
+            onclick="switchGoogleCampusView('satellite')"
+            class="google-view-tab px-3.5 py-1.5 rounded-xl text-xs text-slate-600 font-semibold hover:text-slate-900 transition-all"
+          >
+            Satellite
+          </button>
+          <button
+            type="button"
+            data-google-view="street"
+            onclick="switchGoogleCampusView('street')"
+            class="google-view-tab px-3.5 py-1.5 rounded-xl text-xs text-slate-600 font-semibold hover:text-slate-900 transition-all"
+          >
+            Street View
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+        <div class="aspect-[16/9] max-h-[520px] w-full bg-slate-200">
+          <iframe
+            id="googleCampusLiveFrame"
+            title="Al-Zahara Hospital Location Map in Udayagiri, Mysuru"
+            src="https://maps.google.com/maps?q=8MFG%2BVV+Mysuru,+Karnataka&t=m&z=19&ie=UTF8&iwloc=A&output=embed"
+            class="w-full h-full border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div class="p-4 sm:p-5 bg-white border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="text-xs sm:text-sm text-slate-700">
+            <strong class="font-display text-slate-900">19/1/A, Mahadevapura Main Rd, Udayagiri, Mysuru, Karnataka 570019</strong>
+            <span class="block text-xs text-slate-500 mt-0.5">Google Plus Code: 8MFG+VV Mysuru, Karnataka</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+            <button
+              type="button"
+              onclick="copyHospitalAddress()"
+              class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition-colors"
+            >
+              Copy Address
+            </button>
+            <a
+              href="https://maps.google.com/?q=8MFG%2BVV+Mysuru,+Karnataka"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-4 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold transition-colors"
+            >
+              Open in Google Maps ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT & APPOINTMENT BOOKING SECTION ==================== -->
+  <section id="contact" class="py-16 sm:py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mb-10">
+        <span class="text-xs font-bold uppercase tracking-wider text-teal-700">Patient Desk &amp; Appointments</span>
+        <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-slate-900 mt-1">
+          Contact &amp; Book OPD Consultation
+        </h2>
+        <p class="text-sm text-slate-600 mt-2">
+          Reach out for emergency assistance, specialist appointments, or hospital directions.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left Contact Info Column -->
+        <div class="lg:col-span-5 space-y-5">
+          <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-2xs space-y-5">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-teal-700">Hospital Campus</span>
+              <h3 id="contactHospitalName" class="font-display font-extrabold text-xl text-slate-900 mt-0.5">
+                AL-ZAHARA HOSPITAL
+              </h3>
+              <p id="contactHospitalSubtitle" class="text-xs font-semibold text-slate-500">
+                Udayagiri, Mysuru-19
+              </p>
+            </div>
+
+            <div class="space-y-4 text-sm border-t border-slate-100 pt-4">
+              <div>
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Address</span>
+                <p id="hospitalAddressText" class="text-slate-800 font-medium mt-0.5">
+                  No. 8 M.G. Road, Near Udayagiri Signal, Udayagiri, Mysuru-19
+                </p>
+                <p class="text-xs text-slate-500 mt-0.5">Plus Code: <span id="hospitalPlusCodeText">8MFG+VV Mysuru, Karnataka</span></p>
+              </div>
+
+              <div>
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">24/7 Emergency Helpline</span>
+                <a id="contactEmergencyPhone" href="tel:08212452007" class="font-display font-extrabold text-lg text-rose-700 hover:underline">
+                  0821-2452007
+                </a>
+                <p id="contactEmergencySub" class="text-xs text-slate-500">
+                  Round-the-clock Critical Care &amp; Trauma Desk
+                </p>
+              </div>
+
+              <div>
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Email</span>
+                <a id="contactEmailLink" href="mailto:alzahramys@gmail.com" class="font-semibold text-teal-800 hover:underline">
+                  alzahramys@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl border border-slate-200/80 p-4 space-y-2 text-xs">
+              <div class="flex items-center justify-between">
+                <span class="text-slate-500 font-medium">OPD Hours:</span>
+                <span id="contactHoursOpd" class="font-bold text-slate-800">8:30 AM – 8:00 PM</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-slate-500 font-medium">Visiting Hours:</span>
+                <span id="contactHoursVisiting" class="font-bold text-slate-800">4:00 PM – 7:00 PM</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-slate-500 font-medium">Emergency &amp; Trauma:</span>
+                <span id="contactHoursEmergency" class="font-bold text-emerald-700">Open 24 / 7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Appointment Request Form -->
+        <div class="lg:col-span-7">
+          <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-2xs">
+            <h3 class="font-display font-bold text-xl text-slate-900">Request an OPD Appointment</h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1 mb-6">
+              Submit your preferred department, specialist, and date. Our front desk will confirm your slot.
+            </p>
+
+            <div id="appointmentSuccessBanner" class="hidden mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-950 text-xs sm:text-sm">
+              <div class="font-bold text-emerald-800">✓ Appointment Request Recorded</div>
+              <p id="appointmentSuccessDetails" class="mt-1 text-emerald-900"></p>
+            </div>
+
+            <form id="contactAppointmentForm" novalidate class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="patientName" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Patient Full Name <span class="text-rose-600">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="patientName"
+                    required
+                    placeholder="e.g., Arif Khan"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
+                  />
+                  <p id="patientNameError" class="hidden text-xs text-rose-600 mt-1 font-medium"></p>
+                </div>
+
+                <div>
+                  <label for="patientPhone" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Mobile / WhatsApp Number <span class="text-rose-600">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="patientPhone"
+                    required
+                    placeholder="+91 98450 12345"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
+                  />
+                  <p id="patientPhoneError" class="hidden text-xs text-rose-600 mt-1 font-medium"></p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="patientEmail" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Email Address (Optional)
+                  </label>
+                  <input
+                    type="email"
+                    id="patientEmail"
+                    placeholder="name@gmail.com"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
+                  />
+                  <p id="patientEmailError" class="hidden text-xs text-rose-600 mt-1 font-medium"></p>
+                </div>
+
+                <div>
+                  <label for="appointmentDate" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Preferred Consultation Date <span class="text-rose-600">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    id="appointmentDate"
+                    required
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
+                  />
+                  <p id="appointmentDateError" class="hidden text-xs text-rose-600 mt-1 font-medium"></p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="appointmentSpeciality" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Speciality Department <span class="text-rose-600">*</span>
+                  </label>
+                  <select
+                    id="appointmentSpeciality"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
+                  ></select>
+                </div>
+
+                <div>
+                  <label for="appointmentDoctor" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Preferred Specialist <span class="text-rose-600">*</span>
+                  </label>
+                  <select
+                    id="appointmentDoctor"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
+                  ></select>
+                </div>
+              </div>
+
+              <div>
+                <label for="patientMessage" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Symptoms or Consultation Note (Optional)
+                </label>
+                <textarea
+                  id="patientMessage"
+                  rows="3"
+                  placeholder="Briefly describe symptoms, preferred time slot, or questions..."
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
+                ></textarea>
+                <p id="patientMessageError" class="hidden text-xs text-rose-600 mt-1 font-medium"></p>
+              </div>
+
+              <button
+                type="submit"
+                id="appointmentSubmitBtn"
+                class="w-full py-3.5 px-6 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-bold text-sm shadow-md transition-all"
+              >
+                Submit Appointment Request
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-slate-950 text-slate-300 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-xs sm:text-sm">
+      <div>
+        <h3 class="font-display font-extrabold text-white text-lg">Al-Zahara Hospital</h3>
+        <p id="footerAddressText" class="text-slate-400 mt-2">
+          No. 8 M.G. Road, Near Udayagiri Signal, Udayagiri, Mysuru-19
+        </p>
+        <p id="footerEmailText" class="text-slate-400 mt-1">Email: alzahramys@gmail.com</p>
+        <p class="text-slate-400 mt-1">24/7 Emergency: <span id="footerEmergencyPhone" class="text-emerald-400 font-bold">0821-2452007</span></p>
+      </div>
+
+      <div>
+        <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider mb-3">Quick Links</h4>
+        <ul class="space-y-2 text-slate-400">
+          <li><a href="#specialities" class="hover:text-white transition-colors">Medical Specialities</a></li>
+          <li><a href="#doctors" class="hover:text-white transition-colors">Specialist Doctors</a></li>
+          <li><a href="#campus" class="hover:text-white transition-colors">Campus Map &amp; Directions</a></li>
+          <li><a href="#contact" class="hover:text-white transition-colors">Book OPD Consultation</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider mb-3">Portals</h4>
+        <div class="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onclick="handleStaffNavClick(event)"
+            class="px-3.5 py-2 rounded-xl bg-emerald-900/50 hover:bg-emerald-800 text-emerald-200 border border-emerald-700/50 text-xs font-semibold transition-colors"
+          >
+            Staff Portal (#staff)
+          </button>
+          <button
+            type="button"
+            onclick="copyStaffPortalAddress()"
+            class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors"
+          >
+            Copy #staff Link
+          </button>
+          <button
+            type="button"
+            onclick="handleAdminNavClick(event)"
+            class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold transition-colors"
+          >
+            Admin Portal (#admin)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-900 py-4 px-4 text-center text-xs text-slate-500">
+      © <span id="footerYear">2026</span> Al-Zahara Hospital, Mysuru. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- ==================== PHOTO LIGHTBOX MODAL ==================== -->
+  <div id="photoLightboxModal" class="hidden fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xs p-4 flex items-center justify-center">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl animate-modal">
+      <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between gap-3">
+        <div>
+          <h3 id="lightboxPhotoTitle" class="font-display font-bold text-white text-sm sm:text-base"></h3>
+          <p id="lightboxPhotoCaption" class="text-xs text-slate-400 mt-0.5"></p>
+        </div>
+        <button
+          type="button"
+          onclick="closePhotoLightbox()"
+          class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white"
+        >
+          ✕
+        </button>
+      </div>
+      <div class="bg-black flex items-center justify-center max-h-[75vh] overflow-hidden">
+        <img id="lightboxPhotoImg" src="" alt="Campus Photo" class="max-h-[75vh] w-auto object-contain" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SPECIALITY DETAIL MODAL ==================== -->
+  <div id="specialityDetailModal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-xs p-4 flex items-center justify-center">
+    <div class="bg-white rounded-3xl max-w-xl w-full border border-slate-200 shadow-2xl overflow-hidden animate-modal">
+      <div class="p-6 sm:p-7 space-y-5">
+        <div class="flex items-start justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <div id="specModalIcon" class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-800 flex items-center justify-center shrink-0"></div>
+            <div>
+              <h3 id="specModalTitle" class="font-display font-extrabold text-xl text-slate-900"></h3>
+              <p id="specModalDoctorCount" class="text-xs font-semibold text-teal-700 mt-0.5"></p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onclick="closeSpecialityModal()"
+            class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100"
+          >
+            ✕
+          </button>
+        </div>
+
+        <p id="specModalDescription" class="text-sm text-slate-600 leading-relaxed"></p>
+
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">Department Capabilities</span>
+          <div id="specModalFacilities" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-end gap-2.5">
+          <button
+            type="button"
+            id="specModalViewDoctorsBtn"
+            class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition-colors"
+          >
+            See Specialists
+          </button>
+          <button
+            type="button"
+            id="specModalBookBtn"
+            class="px-4 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold transition-colors"
+          >
+            Book Appointment
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ADMIN LOGIN MODAL ==================== -->
+  <div id="adminLoginModal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-xs p-4 flex items-center justify-center">
+    <div class="bg-white rounded-3xl max-w-md w-full border border-slate-200 shadow-2xl overflow-hidden animate-modal">
+      <div class="bg-slate-900 text-white px-6 py-5 flex items-center justify-between">
+        <div>
+          <h3 class="font-display font-extrabold text-lg">Admin Portal Sign In</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Master Super-Admin &amp; Authorized Administrators</p>
+        </div>
+        <button type="button" onclick="closeAdminLoginModal()" class="text-slate-400 hover:text-white p-1.5">✕</button>
+      </div>
+
+      <form id="adminLoginForm" class="p-6 space-y-4">
+        <div id="adminLoginError" class="hidden p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium"></div>
+
+        <div>
+          <label for="adminUsernameInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+            Admin Username <span class="text-rose-600">*</span>
+          </label>
+          <input
+            type="text"
+            id="adminUsernameInput"
+            autocomplete="username"
+            required
+            placeholder="Enter admin username"
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
+          />
+        </div>
+
+        <div>
+          <label for="adminPasswordInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+            Admin Password <span class="text-rose-600">*</span>
+          </label>
+          <div class="relative">
+            <input
+              type="password"
+              id="adminPasswordInput"
+              autocomplete="current-password"
+              required
+              placeholder="Enter admin password"
+              class="w-full pl-3.5 pr-10 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
+            />
+            <button
+              type="button"
+              onclick="toggleInputVisibility('adminPasswordInput')"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500 hover:text-slate-800"
+            >
+              Show
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-3 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-semibold text-sm shadow-md transition-all"
+        >
+          Sign In to Admin Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== ADMIN DASHBOARD OVERLAY ==================== -->
+  <div id="adminDashboardModal" class="hidden fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-xs overflow-y-auto">
+    <div class="min-h-screen px-3 py-6 sm:px-6 lg:px-8 flex items-start justify-center">
+      <div class="bg-white rounded-3xl max-w-6xl w-full border border-slate-200 shadow-2xl overflow-hidden animate-modal my-auto">
+
+        <!-- Header -->
+        <div class="bg-slate-900 text-white px-5 sm:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex flex-wrap items-center gap-2.5">
+              <h2 class="font-display font-extrabold text-lg sm:text-xl">Al-Zahara Hospital Admin Dashboard</h2>
+              <span id="adminSessionBadge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold"></span>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5">Manage staff credentials, contact info, doctors, specialities &amp; staff logs</p>
+          </div>
+
+          <div class="flex items-center gap-2.5 self-end sm:self-center">
+            <button
+              type="button"
+              onclick="closeAdminDashboardOverlay()"
+              class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors"
+            >
+              View Public Site
+            </button>
+            <button
+              type="button"
+              onclick="logoutAdmin()"
+              class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold transition-colors"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Admin Tabs -->
+        <div class="bg-slate-50 border-b border-slate-200 px-5 sm:px-8 pt-3 flex overflow-x-auto gap-2">
+          <button type="button" data-admin-tab="users" onclick="switchAdminTab('users')" class="admin-tab-btn px-4 py-2.5 rounded-t-xl text-xs sm:text-sm font-bold border-b-2 whitespace-nowrap">
+            Staff Accounts
+          </button>
+          <button type="button" data-admin-tab="contact" onclick="switchAdminTab('contact')" class="admin-tab-btn px-4 py-2.5 rounded-t-xl text-xs sm:text-sm font-bold border-b-2 whitespace-nowrap">
+            Contact &amp; Address
+          </button>
+          <button type="button" data-admin-tab="doctors" onclick="switchAdminTab('doctors')" class="admin-tab-btn px-4 py-2.5 rounded-t-xl text-xs sm:text-sm font-bold border-b-2 whitespace-nowrap">
+            Doctors
+          </button>
+          <button type="button" data-admin-tab="specialities" onclick="switchAdminTab('specialities')" class="admin-tab-btn px-4 py-2.5 rounded-t-xl text-xs sm:text-sm font-bold border-b-2 whitespace-nowrap">
+            Specialities
+          </button>
+          <button type="button" data-admin-tab="staffLogs" onclick="switchAdminTab('staffLogs')" class="admin-tab-btn px-4 py-2.5 rounded-t-xl text-xs sm:text-sm font-bold border-b-2 whitespace-nowrap flex items-center gap-1.5">
+            <span>Staff Logs &amp; Attendance</span>
+            <span id="staffLogsTabCounter" class="px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-extrabold">0</span>
+          </button>
+        </div>
+
+        <!-- TAB 1: MASTER USER & PASSWORD MANAGEMENT -->
+        <div id="adminTabUsers" class="p-5 sm:p-8 space-y-6">
+          <div id="secondaryUserRestrictedBox" class="hidden p-6 rounded-2xl bg-amber-50 border border-amber-200 text-amber-950">
+            <h3 class="font-display font-bold text-base">Master Super-Admin Access Required</h3>
+            <p class="text-xs sm:text-sm mt-1">
+              Signed in as <strong id="restrictedCurrentUsername"></strong>. Creating or revoking staff login credentials is restricted exclusively to <strong>admin_alzahara</strong>.
+            </p>
+          </div>
+
+          <div id="masterUserManagementContainer" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-5">
+              <h3 class="font-display font-bold text-base text-slate-900">Create Staff Portal Account</h3>
+              <p class="text-xs text-slate-500 mt-0.5 mb-4">Staff credentials can sign in at <strong>#staff</strong> on today's date.</p>
+
+              <form id="createAdminUserForm" class="space-y-3.5">
+                <div>
+                  <label for="newStaffUsername" class="block text-xs font-semibold text-slate-700 mb-1">
+                    Staff Username <span class="text-rose-600">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="newStaffUsername"
+                    required
+                    placeholder="e.g., opd_desk_01"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-900"
+                  />
+                </div>
+
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <label for="newStaffPassword" class="block text-xs font-semibold text-slate-700">
+                      Staff Password <span class="text-rose-600">*</span>
+                    </label>
+                    <button type="button" onclick="generateStrongStaffPassword()" class="text-[11px] font-bold text-teal-700 hover:underline">
+                      Generate Password
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    id="newStaffPassword"
+                    required
+                    placeholder="Minimum 6 characters"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-900"
+                  />
+                </div>
+
+                <div>
+                  <label for="newStaffRole" class="block text-xs font-semibold text-slate-700 mb-1">
+                    Staff Role / Desk
+                  </label>
+                  <input
+                    type="text"
+                    id="newStaffRole"
+                    placeholder="e.g., OPD Coordinator / Duty Nurse"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-900"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full py-2.5 px-4 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-semibold text-sm shadow-2xs transition-colors"
+                >
+                  + Create Staff Account
+                </button>
+              </form>
+            </div>
+
+            <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 overflow-hidden">
+              <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+                <h4 class="font-display font-bold text-base text-slate-900">Active Accounts</h4>
+                <span id="adminUsersCountBadge" class="px-2.5 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-bold">1 Account</span>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                      <th class="py-3 px-4">Account</th>
+                      <th class="py-3 px-4">Password</th>
+                      <th class="py-3 px-4">Created</th>
+                      <th class="py-3 px-4 text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminUsersTableBody" class="divide-y divide-slate-100 text-xs sm:text-sm"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: MASTER CONTACT & ADDRESS EDITOR -->
+        <div id="adminTabContact" class="hidden p-5 sm:p-8 space-y-6">
+          <div id="contactRestrictedBox" class="hidden p-6 rounded-2xl bg-amber-50 border border-amber-200 text-amber-950">
+            <h3 class="font-display font-bold text-base">Master Super-Admin Access Required</h3>
+            <p class="text-xs sm:text-sm mt-1">Only <strong>admin_alzahara</strong> can edit hospital contact details and timings.</p>
+          </div>
+
+          <div id="masterContactEditorContainer">
+            <form id="masterEditContactForm" class="space-y-4 bg-slate-50 rounded-2xl border border-slate-200 p-6">
+              <div class="flex items-center justify-between gap-2 pb-2 border-b border-slate-200">
+                <div>
+                  <h3 class="font-display font-bold text-base text-slate-900">Edit Hospital Contact Details &amp; Timings</h3>
+                  <p class="text-xs text-slate-500">Changes update the public contact card and footer immediately.</p>
+                </div>
+                <button type="button" onclick="resetContactInfoToDefault()" class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100">
+                  Reset Defaults
+                </button>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="editContactHospitalName" class="block text-xs font-semibold text-slate-700 mb-1">Hospital Name</label>
+                  <input type="text" id="editContactHospitalName" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+                <div>
+                  <label for="editContactCampusSubtitle" class="block text-xs font-semibold text-slate-700 mb-1">Campus Subtitle</label>
+                  <input type="text" id="editContactCampusSubtitle" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+              </div>
+
+              <div>
+                <label for="editContactAddress" class="block text-xs font-semibold text-slate-700 mb-1">Street Address</label>
+                <input type="text" id="editContactAddress" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label for="editContactEmergencyPhone" class="block text-xs font-semibold text-slate-700 mb-1">Emergency Phone</label>
+                  <input type="text" id="editContactEmergencyPhone" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+                <div>
+                  <label for="editContactAmbulanceCode" class="block text-xs font-semibold text-slate-700 mb-1">Ambulance Code</label>
+                  <input type="text" id="editContactAmbulanceCode" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+                <div>
+                  <label for="editContactOpdPhone" class="block text-xs font-semibold text-slate-700 mb-1">OPD Desk Number</label>
+                  <input type="text" id="editContactOpdPhone" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="editContactEmail" class="block text-xs font-semibold text-slate-700 mb-1">Contact Email</label>
+                  <input type="email" id="editContactEmail" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+                <div>
+                  <label for="editContactEmergencySub" class="block text-xs font-semibold text-slate-700 mb-1">Emergency Subtitle</label>
+                  <input type="text" id="editContactEmergencySub" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label for="editContactHoursOpd" class="block text-xs font-semibold text-slate-700 mb-1">OPD Hours</label>
+                  <input type="text" id="editContactHoursOpd" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+                <div>
+                  <label for="editContactHoursVisiting" class="block text-xs font-semibold text-slate-700 mb-1">Visiting Hours</label>
+                  <input type="text" id="editContactHoursVisiting" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+                <div>
+                  <label for="editContactHoursEmergency" class="block text-xs font-semibold text-slate-700 mb-1">Emergency Hours</label>
+                  <input type="text" id="editContactHoursEmergency" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+              </div>
+
+              <button type="submit" class="px-6 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-semibold text-sm shadow-2xs">
+                Save Contact Details
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- TAB 3: DOCTORS MANAGEMENT -->
+        <div id="adminTabDoctors" class="hidden p-5 sm:p-8 space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-5">
+              <h3 id="doctorFormTitle" class="font-display font-bold text-base text-slate-900">Add Specialist Doctor</h3>
+              <p id="doctorFormSubtitle" class="text-xs text-slate-500 mt-0.5 mb-4">
+                New consultants appear immediately on the public "Our Doctors" directory.
+              </p>
+
+              <form id="adminAddDoctorForm" class="space-y-3">
+                <input type="hidden" id="editingDoctorId" value="" />
+
+                <div>
+                  <label for="newDocName" class="block text-xs font-semibold text-slate-700 mb-1">Doctor Name <span class="text-rose-600">*</span></label>
+                  <input type="text" id="newDocName" required placeholder="e.g., Dr. Farhan Ahmed" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+
+                <div>
+                  <label for="newDocQual" class="block text-xs font-semibold text-slate-700 mb-1">Qualifications <span class="text-rose-600">*</span></label>
+                  <input type="text" id="newDocQual" required placeholder="e.g., MBBS, MD (Medicine)" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label for="newDocSpeciality" class="block text-xs font-semibold text-slate-700 mb-1">Speciality <span class="text-rose-600">*</span></label>
+                    <select id="newDocSpeciality" class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm"></select>
+                  </div>
+                  <div>
+                    <label for="newDocExp" class="block text-xs font-semibold text-slate-700 mb-1">Experience (Yrs) <span class="text-rose-600">*</span></label>
+                    <input type="number" id="newDocExp" min="1" max="60" value="10" required class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="newDocTimings" class="block text-xs font-semibold text-slate-700 mb-1">OPD Timings <span class="text-rose-600">*</span></label>
+                  <input type="text" id="newDocTimings" required placeholder="e.g., Mon – Sat • 10:00 AM – 2:00 PM" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+
+                <div>
+                  <label for="newDocFocus" class="block text-xs font-semibold text-slate-700 mb-1">Clinical Focus</label>
+                  <input type="text" id="newDocFocus" placeholder="e.g., Diabetes, Hypertension & General Medicine" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+
+                <!-- Photo Upload / URL -->
+                <div class="pt-1 border-t border-slate-200/80 space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-semibold text-slate-700">Doctor Photo (Optional)</span>
+                    <button type="button" onclick="clearDoctorPhotoSelection()" class="text-[11px] font-semibold text-rose-600 hover:underline">
+                      Clear Photo
+                    </button>
+                  </div>
+
+                  <div class="flex items-center gap-3">
+                    <div id="doctorPhotoPreviewBox" class="w-14 h-14 rounded-xl border border-slate-200 bg-white overflow-hidden flex items-center justify-center shrink-0">
+                      <span class="text-[10px] font-semibold text-slate-400 text-center px-1">Default Avatar</span>
+                    </div>
+                    <div class="flex-1 space-y-1.5">
+                      <input type="file" id="newDocPhotoFile" accept="image/*" onchange="handleDoctorPhotoFileSelect(event)" class="block w-full text-xs text-slate-600" />
+                      <input type="url" id="newDocPhotoUrl" oninput="handleDoctorPhotoUrlInput(this.value)" placeholder="Or paste image URL..." class="w-full px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-xs" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2 pt-1">
+                  <button type="submit" id="doctorFormSubmitBtn" class="flex-1 py-2.5 px-4 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-semibold text-xs sm:text-sm">
+                    + Add Doctor to Directory
+                  </button>
+                  <button type="button" id="cancelEditDoctorBtn" onclick="cancelEditDoctorMode()" class="hidden px-3.5 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold text-xs">
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 overflow-hidden">
+              <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+                <h4 class="font-display font-bold text-base text-slate-900">Directory Doctors</h4>
+                <span id="adminDoctorsCount" class="px-2.5 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-bold">8 Doctors</span>
+              </div>
+              <div id="adminDoctorsList" class="divide-y divide-slate-100 max-h-[540px] overflow-y-auto"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: SPECIALITIES MANAGEMENT -->
+        <div id="adminTabSpecialities" class="hidden p-5 sm:p-8 space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-5">
+              <h3 class="font-display font-bold text-base text-slate-900 mb-3">Add Speciality Department</h3>
+              <form id="adminAddSpecialityForm" class="space-y-3">
+                <div>
+                  <label for="newSpecName" class="block text-xs font-semibold text-slate-700 mb-1">Department Name <span class="text-rose-600">*</span></label>
+                  <input type="text" id="newSpecName" required placeholder="e.g., Ophthalmology" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+                <div>
+                  <label for="newSpecShortDesc" class="block text-xs font-semibold text-slate-700 mb-1">Short Summary <span class="text-rose-600">*</span></label>
+                  <textarea id="newSpecShortDesc" rows="2" required placeholder="Brief department overview..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm"></textarea>
+                </div>
+                <div>
+                  <label for="newSpecFullDesc" class="block text-xs font-semibold text-slate-700 mb-1">Detailed Overview</label>
+                  <textarea id="newSpecFullDesc" rows="2" placeholder="Detailed clinical description..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm"></textarea>
+                </div>
+                <div>
+                  <label for="newSpecFacilities" class="block text-xs font-semibold text-slate-700 mb-1">Facilities (Comma Separated)</label>
+                  <input type="text" id="newSpecFacilities" placeholder="e.g., Phaco Cataract, OCT Scan, Retina Clinic" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+                <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-semibold text-sm">
+                  + Add Speciality
+                </button>
+              </form>
+            </div>
+
+            <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 overflow-hidden">
+              <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+                <h4 class="font-display font-bold text-base text-slate-900">Active Departments</h4>
+                <span id="adminSpecsCount" class="px-2.5 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-bold">8 Specialities</span>
+              </div>
+              <div id="adminSpecialitiesList" class="divide-y divide-slate-100 max-h-[480px] overflow-y-auto"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: STAFF ATTENDANCE & LOGIN/LOGOUT MONITOR -->
+        <div id="adminTabStaffLogs" class="hidden p-5 sm:p-8 space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
+              <span class="text-xs font-semibold text-emerald-800">Attendance Records</span>
+              <div id="kpiTotalAttendanceCount" class="font-display font-extrabold text-2xl text-emerald-950 mt-1">0</div>
+            </div>
+            <div class="bg-teal-50 border border-teal-200 rounded-2xl p-4">
+              <span class="text-xs font-semibold text-teal-800">Staff Login Sessions</span>
+              <div id="kpiTotalLoginsCount" class="font-display font-extrabold text-2xl text-teal-950 mt-1">0</div>
+            </div>
+            <div class="bg-slate-100 border border-slate-200 rounded-2xl p-4">
+              <span class="text-xs font-semibold text-slate-600">Currently Active Staff</span>
+              <div id="kpiActiveStaffCount" class="font-display font-extrabold text-2xl text-slate-900 mt-1">0</div>
+            </div>
+          </div>
+
+          <!-- Filter Bar -->
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-3">
+              <div>
+                <label for="adminStaffLogDateFilter" class="block text-[11px] font-semibold text-slate-600 mb-1">Filter by Date</label>
+                <input type="date" id="adminStaffLogDateFilter" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-xs" />
+              </div>
+              <div>
+                <label for="adminStaffLogUserFilter" class="block text-[11px] font-semibold text-slate-600 mb-1">Filter by Staff</label>
+                <select id="adminStaffLogUserFilter" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-xs">
+                  <option value="ALL">All Staff Members</option>
+                </select>
+              </div>
+            </div>
+            <button type="button" onclick="resetAdminStaffLogsFilter()" class="px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100">
+              Reset Filter
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Staff Attendance Table -->
+            <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 overflow-hidden">
+              <div class="px-4 py-3.5 border-b border-slate-100 flex items-center justify-between">
+                <h4 class="font-display font-bold text-sm text-slate-900">Staff Attendance Register</h4>
+                <span id="adminFilteredAttendanceBadge" class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold">0 Records</span>
+              </div>
+              <div class="overflow-x-auto max-h-[340px] overflow-y-auto">
+                <table class="w-full text-left border-collapse text-xs">
+                  <thead>
+                    <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-bold uppercase text-slate-500">
+                      <th class="py-2.5 px-3.5">Staff</th>
+                      <th class="py-2.5 px-3.5">Date &amp; Time</th>
+                      <th class="py-2.5 px-3.5">Status</th>
+                      <th class="py-2.5 px-3.5">Duty Note</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminStaffAttendanceTableBody" class="divide-y divide-slate-100"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Staff Login / Logout Audit Table -->
+            <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 overflow-hidden">
+              <div class="px-4 py-3.5 border-b border-slate-100 flex items-center justify-between">
+                <h4 class="font-display font-bold text-sm text-slate-900">Staff Login / Logout Audit</h4>
+                <span id="adminFilteredLoginLogsBadge" class="px-2.5 py-0.5 rounded-full bg-teal-50 text-teal-800 text-xs font-bold">0 Sessions</span>
+              </div>
+              <div class="overflow-x-auto max-h-[340px] overflow-y-auto">
+                <table class="w-full text-left border-collapse text-xs">
+                  <thead>
+                    <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-bold uppercase text-slate-500">
+                      <th class="py-2.5 px-3.5">Staff</th>
+                      <th class="py-2.5 px-3.5">Date</th>
+                      <th class="py-2.5 px-3.5">Login</th>
+                      <th class="py-2.5 px-3.5">Logout / Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminStaffLoginHistoryTableBody" class="divide-y divide-slate-100"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== STAFF LOGIN MODAL ==================== -->
+  <div id="staffLoginModal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-xs p-4 flex items-center justify-center">
+    <div class="bg-white rounded-3xl max-w-md w-full border border-slate-200 shadow-2xl overflow-hidden animate-modal">
+      <div class="bg-gradient-to-r from-emerald-900 to-teal-900 text-white px-6 py-5 flex items-center justify-between">
+        <div>
+          <h3 class="font-display font-extrabold text-lg">Staff Portal Sign In</h3>
+          <p class="text-xs text-emerald-100/80 mt-0.5">Doctor OPD Timings, Appointments &amp; Staff Attendance (#staff)</p>
+        </div>
+        <button type="button" onclick="closeStaffLoginModal()" class="text-emerald-200 hover:text-white p-1.5">✕</button>
+      </div>
+
+      <form id="staffLoginForm" class="p-6 space-y-4">
+        <div id="staffLoginError" class="hidden p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium"></div>
+
+        <div>
+          <label for="staffUsernameInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+            Staff Username <span class="text-rose-600">*</span>
+          </label>
+          <input
+            type="text"
+            id="staffUsernameInput"
+            autocomplete="username"
+            required
+            placeholder="Enter your assigned staff username"
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600"
+          />
+        </div>
+
+        <div>
+          <label for="staffPasswordInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+            Staff Password <span class="text-rose-600">*</span>
+          </label>
+          <div class="relative">
+            <input
+              type="password"
+              id="staffPasswordInput"
+              autocomplete="current-password"
+              required
+              placeholder="Enter your assigned staff password"
+              class="w-full pl-3.5 pr-12 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600"
+            />
+            <button
+              type="button"
+              onclick="toggleInputVisibility('staffPasswordInput')"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500 hover:text-slate-800"
+            >
+              Show
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="staffLoginDateInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+              Login Date (Today Only) <span class="text-rose-600">*</span>
+            </label>
+            <input
+              type="date"
+              id="staffLoginDateInput"
+              required
+              class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600"
+            />
+          </div>
+
+          <div>
+            <label for="staffPortalRouteConfirm" class="block text-xs font-semibold text-slate-700 mb-1.5">
+              Staff Portal Address
+            </label>
+            <input
+              type="text"
+              id="staffPortalRouteConfirm"
+              value="#staff"
+              readonly
+              class="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 font-mono text-xs font-bold text-teal-800"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-sm shadow-md transition-all"
+        >
+          Sign In to Staff Portal
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== DEDICATED STAFF DASHBOARD OVERLAY ==================== -->
+  <div id="staffDashboardModal" class="hidden fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-xs overflow-y-auto">
+    <div class="min-h-screen px-3 py-6 sm:px-6 lg:px-8 flex items-start justify-center">
+      <div class="bg-white rounded-3xl max-w-5xl w-full border border-slate-200 shadow-2xl overflow-hidden animate-modal my-auto">
+
+        <div class="bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 text-white px-5 sm:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex flex-wrap items-center gap-2">
+              <h2 class="font-display font-extrabold text-lg sm:text-xl">Al-Zahara Staff Portal</h2>
+              <span id="staffSessionBadge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30"></span>
+            </div>
+            <p class="text-xs text-emerald-100/80 mt-0.5">
+              Permitted Operations: Doctor OPD Timings, Patient Appointments &amp; Staff Attendance
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2.5 self-end sm:self-center">
+            <button
+              type="button"
+              onclick="closeStaffDashboardOverlay()"
+              class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors"
+            >
+              View Public Site
+            </button>
+            <button
+              type="button"
+              onclick="logoutStaff()"
+              class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold shadow-sm transition-colors"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Staff Tabs -->
+        <div class="bg-slate-50 border-b border-slate-200 px-5 sm:px-8 pt-3 flex overflow-x-auto gap-2">
+          <button
+            type="button"
+            data-staff-tab="timings"
+            onclick="switchStaffTab('timings')"
+            class="staff-tab-btn px-4 py-2.5 rounded-t-xl text-xs sm:text-sm font-bold border-b-2 transition-all whitespace-nowrap"
+          >
+            Change Doctor OPD Timings
+          </button>
+
+          <button
+            type="button"
+            data-staff-tab="appointments"
+            onclick="switchStaffTab('appointments')"
+            class="staff-tab-btn px-4 py-2.5 rounded-t-xl text-xs sm:text-sm font-bold border-b-2 transition-all whitespace-nowrap flex items-center gap-1.5"
+          >
+            <span>Patient Appointments</span>
+            <span id="staffAppointmentsTabCounter" class="px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[10px] font-extrabold">0</span>
+          </button>
+
+          <button
+            type="button"
+            data-staff-tab="attendance"
+            onclick="switchStaffTab('attendance')"
+            class="staff-tab-btn px-4 py-2.5 rounded-t-xl text-xs sm:text-sm font-bold border-b-2 transition-all whitespace-nowrap"
+          >
+            Staff Attendance Register
+          </button>
+        </div>
+
+        <!-- STAFF TAB 1: DOCTOR TIMINGS -->
+        <div id="staffTabTimings" class="staff-tab-panel p-5 sm:p-8 space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-emerald-50/80 border border-emerald-200 rounded-2xl p-4">
+            <div>
+              <h3 class="font-display font-bold text-sm sm:text-base text-emerald-950">
+                Update Specialist Doctor OPD Consultation Timings
+              </h3>
+              <p class="text-xs text-emerald-800 mt-0.5">
+                Saved timings update the public "Our Doctors" directory immediately.
+              </p>
+            </div>
+            <input
+              type="text"
+              id="staffDoctorSearchInput"
+              placeholder="Filter doctor by name or speciality..."
+              class="w-full sm:w-64 px-3.5 py-2 rounded-xl border border-emerald-200 bg-white text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-emerald-600"
+            />
+          </div>
+
+          <div id="staffDoctorTimingsList" class="divide-y divide-slate-200 border border-slate-200 rounded-2xl overflow-hidden bg-white max-h-[460px] overflow-y-auto"></div>
+        </div>
+
+        <!-- STAFF TAB 2: PATIENT APPOINTMENTS (WITH CONFIRM & DELETE) -->
+        <div id="staffTabAppointments" class="hidden staff-tab-panel p-5 sm:p-8 space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-emerald-50/80 border border-emerald-200 rounded-2xl p-4">
+            <div>
+              <h3 class="font-display font-bold text-sm sm:text-base text-emerald-950">
+                Patient Appointment Requests
+              </h3>
+              <p class="text-xs text-emerald-800 mt-0.5">
+                Review incoming OPD consultation requests, confirm patient slots, or delete completed/cancelled appointments.
+              </p>
+            </div>
+            <span id="staffInquiriesSummary" class="self-start sm:self-center px-3 py-1 rounded-full bg-white border border-emerald-200 text-emerald-900 text-xs font-bold">
+              0 Total Requests
+            </span>
+          </div>
+
+          <div id="staffInquiriesList" class="space-y-3 max-h-[460px] overflow-y-auto"></div>
+        </div>
+
+        <!-- STAFF TAB 3: STAFF ATTENDANCE -->
+        <div id="staffTabAttendance" class="hidden staff-tab-panel p-5 sm:p-8 space-y-6">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div class="lg:col-span-5 bg-slate-50 rounded-2xl border border-slate-200 p-5">
+              <h4 class="font-display font-bold text-base text-slate-900 mb-1">Mark Daily Staff Attendance</h4>
+              <p class="text-xs text-slate-500 mb-4">Record your shift check-in status for today's duty roster.</p>
+
+              <form id="staffMarkAttendanceForm" class="space-y-3.5">
+                <div>
+                  <label for="attendanceStaffUsername" class="block text-xs font-semibold text-slate-700 mb-1">
+                    Staff Username <span class="text-rose-600">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="attendanceStaffUsername"
+                    readonly
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-100 font-mono text-sm font-bold text-slate-800"
+                  />
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label for="attendanceDateInput" class="block text-xs font-semibold text-slate-700 mb-1">
+                      Duty Date <span class="text-rose-600">*</span>
+                    </label>
+                    <input
+                      type="date"
+                      id="attendanceDateInput"
+                      required
+                      readonly
+                      class="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-slate-100 text-sm font-semibold text-slate-800 cursor-not-allowed"
+                    />
+                  </div>
+
+                  <div>
+                    <label for="attendanceStatusSelect" class="block text-xs font-semibold text-slate-700 mb-1">
+                      Status <span class="text-rose-600">*</span>
+                    </label>
+                    <select
+                      id="attendanceStatusSelect"
+                      required
+                      class="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-900"
+                    >
+                      <option value="Present (On Duty)">Present (On Duty)</option>
+                      <option value="Night Shift">Night Shift</option>
+                      <option value="Half Day">Half Day</option>
+                      <option value="On Approved Leave">On Approved Leave</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="attendanceShiftNote" class="block text-xs font-semibold text-slate-700 mb-1">
+                    Desk / Ward Duty Note
+                  </label>
+                  <input
+                    type="text"
+                    id="attendanceShiftNote"
+                    placeholder="e.g., Morning OPD Desk A / Emergency Reception"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-900"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full py-2.5 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-sm shadow-sm transition-colors"
+                >
+                  ✓ Submit Staff Attendance
+                </button>
+              </form>
+            </div>
+
+            <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 overflow-hidden">
+              <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+                <div>
+                  <h4 class="font-display font-bold text-base text-slate-900">Staff Attendance Records</h4>
+                  <p class="text-xs text-slate-500">Timestamped duty check-ins across hospital shifts.</p>
+                </div>
+                <span id="staffAttendanceCountBadge" class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold">
+                  0 Entries
+                </span>
+              </div>
+
+              <div class="overflow-x-auto max-h-[400px] overflow-y-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                      <th class="py-3 px-4">Staff Member</th>
+                      <th class="py-3 px-4">Date &amp; Time</th>
+                      <th class="py-3 px-4">Status</th>
+                      <th class="py-3 px-4">Duty Note</th>
+                    </tr>
+                  </thead>
+                  <tbody id="staffAttendanceTableBody" class="divide-y divide-slate-100 text-xs sm:text-sm"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST NOTIFICATION CONTAINER ==================== -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-[60] flex flex-col gap-2.5 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+  <!-- ==================== COMPLETE APPLICATION JAVASCRIPT ==================== -->
+  <script>
+    const MASTER_ADMIN = Object.freeze({
+      username: 'admin_alzahara',
+      password: 'AlZahara@2026',
+      role: 'Master Super-Admin',
+      isMaster: true
+    });
+
+    const STORAGE_KEYS = Object.freeze({
+      SPECIALITIES: 'alzahara_hospital_specialities_v1',
+      DOCTORS: 'alzahara_hospital_doctors_v1',
+      ADMIN_USERS: 'alzahara_hospital_admin_users_v1',
+      INQUIRIES: 'alzahara_hospital_inquiries_v1',
+      CONTACT_INFO: 'alzahara_hospital_contact_v1',
+      ATTENDANCE: 'alzahara_hospital_attendance_v1',
+      STAFF_ACTIVITY_LOGS: 'alzahara_hospital_staff_activity_v1',
+      ACTIVE_SESSION: 'alzahara_hospital_active_session_v1',
+      STAFF_SESSION: 'alzahara_hospital_staff_session_v1'
+    });
+
+    function getTodayISODate() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function formatDisplayTime(dateObj = new Date()) {
+      return dateObj.toLocaleTimeString('en-IN', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+    }
+
+    const DEFAULT_CONTACT_INFO = Object.freeze({
+      hospitalName: 'AL-ZAHARA HOSPITAL',
+      campusSubtitle: 'Udayagiri, Mysuru-19',
+      address: 'No. 8 M.G. Road, Near Udayagiri Signal, Udayagiri, Mysuru-19',
+      plusCode: '8MFG+VV Mysuru, Karnataka',
+      emergencyPhone: '0821-2452007',
+      ambulanceCode: '108',
+      emergencySub: 'Round-the-clock Critical Care & Trauma Desk',
+      opdPhone: '6361266169',
+      email: 'alzahramys@gmail.com',
+      hoursOpd: '8:30 AM – 8:00 PM',
+      hoursVisiting: '4:00 PM – 7:00 PM',
+      hoursEmergency: 'Open 24 / 7'
+    });
+
+    const HOSPITAL_MAIN_PHOTO = Object.freeze({
+      title: 'AL-ZAHARA HOSPITAL — 19/1/A, Mahadevapura Main Rd',
+      caption: '19/1/A, Mahadevapura Main Rd, Udayagiri, Mysuru, Karnataka 570019 • Plus Code: 8MFG+VV Mysuru, Karnataka',
+      url: 'image_4f2069.jpg',
+      fallback: 'https://placehold.co/1200x520/0f766e/ffffff?text=AL-ZAHARA+HOSPITAL+%E2%80%A2+19%2F1%2FA+Mahadevapura+Main+Rd,+Udayagiri,+Mysuru'
+    });
+
+    function openPhotoLightbox() {
+      const imgEl = document.getElementById('lightboxPhotoImg');
+      const titleEl = document.getElementById('lightboxPhotoTitle');
+      const capEl = document.getElementById('lightboxPhotoCaption');
+
+      if (titleEl) titleEl.textContent = HOSPITAL_MAIN_PHOTO.title;
+      if (capEl) capEl.textContent = HOSPITAL_MAIN_PHOTO.caption;
+      if (imgEl) {
+        imgEl.onerror = function () {
+          this.onerror = null;
+          this.src = HOSPITAL_MAIN_PHOTO.fallback;
+        };
+        imgEl.src = HOSPITAL_MAIN_PHOTO.url;
+      }
+
+      document.getElementById('photoLightboxModal')?.classList.remove('hidden');
+    }
+
+    function closePhotoLightbox() {
+      document.getElementById('photoLightboxModal')?.classList.add('hidden');
+    }
+
+    const GOOGLE_CAMPUS_EMBED_URLS = Object.freeze({
+      map: 'https://maps.google.com/maps?q=8MFG%2BVV+Mysuru,+Karnataka&t=m&z=19&ie=UTF8&iwloc=A&output=embed',
+      satellite: 'https://maps.google.com/maps?q=8MFG%2BVV+Mysuru,+Karnataka&t=k&z=19&ie=UTF8&iwloc=A&output=embed',
+      street: 'https://maps.google.com/maps?q=8MFG%2BVV+Mysuru,+Karnataka&layer=c&output=svembed'
+    });
+
+    function switchGoogleCampusView(mode) {
+      const frame = document.getElementById('googleCampusLiveFrame');
+      if (frame && GOOGLE_CAMPUS_EMBED_URLS[mode]) {
+        frame.src = GOOGLE_CAMPUS_EMBED_URLS[mode];
+      }
+
+      document.querySelectorAll('.google-view-tab').forEach(btn => {
+        const isSelected = btn.getAttribute('data-google-view') === mode;
+        if (isSelected) {
+          btn.classList.add('bg-white', 'text-teal-800', 'font-bold', 'shadow-2xs');
+          btn.classList.remove('text-slate-600', 'font-semibold');
+        } else {
+          btn.classList.remove('bg-white', 'text-teal-800', 'font-bold', 'shadow-2xs');
+          btn.classList.add('text-slate-600', 'font-semibold');
+        }
+      });
+    }
+
+    const DEFAULT_SPECIALITIES = [
+      {
+        id: 'spec-cardiology',
+        name: 'Cardiology',
+        iconType: 'heart',
+        shortDesc: 'Comprehensive heart care including interventional cardiology, echocardiography, electrophysiology, and cardiac ICU.',
+        fullDesc: 'The Al-Zahara Heart Institute offers 24/7 primary angioplasty, advanced cardiac catheterization labs, non-invasive stress diagnostics, and preventive heart wellness programs.',
+        facilities: ['24/7 Cath Lab', '3D Echocardiography', 'Coronary Care Unit (CCU)', 'Holter & TMT Monitoring']
+      },
+      {
+        id: 'spec-neurology',
+        name: 'Neurology & Neurosurgery',
+        iconType: 'brain',
+        shortDesc: 'Advanced diagnosis and microsurgical treatment for stroke, epilepsy, movement disorders, and spine conditions.',
+        fullDesc: 'Equipped with a dedicated Stroke Rapid-Response Unit, neuro-navigation theatres, and digital EEG/EMG suites for comprehensive brain and nervous system care.',
+        facilities: ['Acute Stroke Unit', 'Digital Video EEG', 'Micro-Neurosurgery', 'Neuro-Rehabilitation']
+      },
+      {
+        id: 'spec-orthopedics',
+        name: 'Orthopedics & Joint Replacement',
+        iconType: 'bone',
+        shortDesc: 'Robotic-assisted knee & hip replacement, arthroscopic sports injury repair, and complex trauma reconstruction.',
+        fullDesc: 'Our orthopedic surgeons specialize in minimally invasive joint preservation, spine instrumentation, and rapid-recovery physiotherapy protocols.',
+        facilities: ['Robotic Joint Suite', 'Arthroscopy Theatre', 'Fracture & Trauma Bay', 'Sports Rehab Gym']
+      },
+      {
+        id: 'spec-pediatrics',
+        name: 'Pediatrics & Neonatology',
+        iconType: 'child',
+        shortDesc: 'Compassionate child healthcare, Level-III NICU, immunization clinics, and pediatric developmental care.',
+        fullDesc: 'Designed with child-friendly consultation zones and an advanced Level-III Neonatal Intensive Care Unit staffed round the clock by neonatologists.',
+        facilities: ['Level-III NICU', 'Pediatric Emergency', 'Well-Baby Immunization', 'Growth & Nutrition Clinic']
+      },
+      {
+        id: 'spec-gynecology',
+        name: 'Obstetrics & Gynecology',
+        iconType: 'mother',
+        shortDesc: 'High-risk pregnancy care, painless delivery suites, fertility counseling, and minimally invasive laparoscopic surgery.',
+        fullDesc: 'Supporting women across every stage of life with modern LDRP birthing suites, fetal medicine ultrasound, and specialized gynecological laparoscopy.',
+        facilities: ['LDRP Birthing Suites', 'Fetal Medicine Unit', 'Laparoscopic Surgery', 'Antenatal Care Classes']
+      },
+      {
+        id: 'spec-surgery',
+        name: 'General & Laparoscopic Surgery',
+        iconType: 'scalpel',
+        shortDesc: 'Keyhole abdominal, gallbladder, hernia, colorectal, and laser proctology procedures with faster recovery.',
+        fullDesc: 'Our modular laminar-flow operation theatres feature high-definition 4K laparoscopic towers for safe, minimal-scar surgical outcomes.',
+        facilities: ['4K Laparoscopy Suites', 'Day-Care Surgery Unit', 'Laser Proctology', 'Surgical ICU']
+      },
+      {
+        id: 'spec-gastro',
+        name: 'Gastroenterology & Hepatology',
+        iconType: 'stomach',
+        shortDesc: 'Diagnostic and therapeutic endoscopy, ERCP, liver clinic, and digestive disorder management.',
+        fullDesc: 'Providing painless upper GI endoscopy, colonoscopy, fibroscan liver assessment, and multidisciplinary hepatobiliary care.',
+        facilities: ['HD Endoscopy Suite', 'Therapeutic ERCP', 'Liver & FibroScan Clinic', 'GI Motility Lab']
+      },
+      {
+        id: 'spec-dermatology',
+        name: 'Dermatology & Cosmetology',
+        iconType: 'sparkle',
+        shortDesc: 'Clinical dermatology, allergy testing, pediatric skin care, and US-FDA approved laser skin therapies.',
+        fullDesc: 'Treating chronic skin, hair, and nail conditions alongside evidence-based aesthetic and dermatosurgical procedures.',
+        facilities: ['Dermatosurgery Suite', 'Phototherapy Unit', 'Allergy Patch Testing', 'Medical Laser Clinic']
+      }
+    ];
+
+    const DEFAULT_DOCTORS = [
+      {
+        id: 'doc-1',
+        name: 'Dr. Tariq Al-Zahara',
+        qualifications: 'MBBS, MD, DM (Cardiology)',
+        speciality: 'Cardiology',
+        experience: 19,
+        timings: 'Mon – Sat • 9:30 AM – 2:00 PM',
+        focus: 'Complex Coronary Angioplasty & Heart Failure Management',
+        avatarTone: 'teal',
+        gender: 'male'
+      },
+      {
+        id: 'doc-2',
+        name: 'Dr. Ayesha Siddiqui',
+        qualifications: 'MBBS, MS, DNB (OBG)',
+        speciality: 'Obstetrics & Gynecology',
+        experience: 15,
+        timings: 'Mon – Sat • 10:00 AM – 4:00 PM',
+        focus: 'High-Risk Obstetrics & Minimal Access Gynec Surgery',
+        avatarTone: 'rose',
+        gender: 'female'
+      },
+      {
+        id: 'doc-3',
+        name: 'Dr. Rohan Kulkarni',
+        qualifications: 'MBBS, MS (Ortho), MCh',
+        speciality: 'Orthopedics & Joint Replacement',
+        experience: 16,
+        timings: 'Tue – Sat • 11:00 AM – 5:00 PM',
+        focus: 'Robotic Knee Replacement & Sports Arthroscopy',
+        avatarTone: 'sky',
+        gender: 'male'
+      },
+      {
+        id: 'doc-4',
+        name: 'Dr. Fatima Noorani',
+        qualifications: 'MBBS, MD, DM (Neurology)',
+        speciality: 'Neurology & Neurosurgery',
+        experience: 14,
+        timings: 'Mon – Fri • 9:00 AM – 1:30 PM',
+        focus: 'Stroke Intervention, Epilepsy & Headache Disorders',
+        avatarTone: 'indigo',
+        gender: 'female'
+      },
+      {
+        id: 'doc-5',
+        name: 'Dr. Sameer Deshmukh',
+        qualifications: 'MBBS, MD (Pediatrics), Fellowship NICU',
+        speciality: 'Pediatrics & Neonatology',
+        experience: 13,
+        timings: 'Mon – Sat • 10:30 AM – 3:30 PM',
+        focus: 'Neonatal Intensive Care & Pediatric Asthma',
+        avatarTone: 'emerald',
+        gender: 'male'
+      },
+      {
+        id: 'doc-6',
+        name: 'Dr. Priya Nair',
+        qualifications: 'MBBS, MS, FMAS, FIAGES',
+        speciality: 'General & Laparoscopic Surgery',
+        experience: 17,
+        timings: 'Mon, Wed, Fri • 2:00 PM – 6:30 PM',
+        focus: 'Advanced Laparoscopic GI & Hernia Surgery',
+        avatarTone: 'amber',
+        gender: 'female'
+      },
+      {
+        id: 'doc-7',
+        name: 'Dr. Imran Qureshi',
+        qualifications: 'MBBS, MD, DM (Gastroenterology)',
+        speciality: 'Gastroenterology & Hepatology',
+        experience: 12,
+        timings: 'Tue, Thu, Sat • 10:00 AM – 3:00 PM',
+        focus: 'Therapeutic Endoscopy, ERCP & Fatty Liver Care',
+        avatarTone: 'teal',
+        gender: 'male'
+      },
+      {
+        id: 'doc-8',
+        name: 'Dr. Meera Krishnan',
+        qualifications: 'MBBS, MD (Dermatology), DDVL',
+        speciality: 'Dermatology & Cosmetology',
+        experience: 11,
+        timings: 'Mon – Sat • 11:30 AM – 5:30 PM',
+        focus: 'Clinical Dermatology, Trichology & Laser Therapy',
+        avatarTone: 'rose',
+        gender: 'female'
+      }
+    ];
+
+    const DEFAULT_INQUIRIES = [
+      {
+        id: 'INQ-2026-101',
+        patientName: 'Zayd Rahman',
+        patientPhone: '+91 98451 22310',
+        patientEmail: 'zayd.rahman@gmail.com',
+        speciality: 'Cardiology',
+        doctor: 'Dr. Tariq Al-Zahara',
+        preferredDate: '2026-11-26',
+        message: 'Routine preventive cardiac checkup and ECG consultation in the morning slot.',
+        submittedAt: '2026-11-23 09:40 AM',
+        status: 'Pending'
+      }
+    ];
+
+    let state = {
+      specialities: [],
+      doctors: [],
+      adminUsers: [],
+      inquiries: [],
+      contactInfo: {},
+      attendanceRecords: [],
+      staffActivityLogs: [],
+      activeSession: null,
+      staffSession: null,
+      selectedDoctorFilter: 'ALL',
+      doctorSearchQuery: '',
+      staffDoctorSearchQuery: '',
+      adminStaffLogDateFilter: '',
+      adminStaffLogUserFilter: 'ALL',
+      currentAdminTab: 'users',
+      currentStaffTab: 'timings',
+      revealedPasswords: {},
+      pendingDeleteInquiryId: null
+    };
+
+    function loadFromStorage(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return JSON.parse(JSON.stringify(fallback));
+        const parsed = JSON.parse(raw);
+        return parsed !== null && parsed !== undefined ? parsed : JSON.parse(JSON.stringify(fallback));
+      } catch (err) {
+        return JSON.parse(JSON.stringify(fallback));
+      }
+    }
+
+    function saveToStorage(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch (err) {
+        console.warn('Unable to persist state to localStorage:', err);
+      }
+    }
+
+    function initializeState() {
+      state.specialities = loadFromStorage(STORAGE_KEYS.SPECIALITIES, DEFAULT_SPECIALITIES);
+      state.doctors = loadFromStorage(STORAGE_KEYS.DOCTORS, DEFAULT_DOCTORS);
+      state.adminUsers = loadFromStorage(STORAGE_KEYS.ADMIN_USERS, []);
+      state.inquiries = loadFromStorage(STORAGE_KEYS.INQUIRIES, DEFAULT_INQUIRIES);
+      const loadedContact = loadFromStorage(STORAGE_KEYS.CONTACT_INFO, DEFAULT_CONTACT_INFO);
+      state.contactInfo = Object.assign({}, DEFAULT_CONTACT_INFO, loadedContact);
+      state.attendanceRecords = loadFromStorage(STORAGE_KEYS.ATTENDANCE, []);
+      state.staffActivityLogs = loadFromStorage(STORAGE_KEYS.STAFF_ACTIVITY_LOGS, []);
+
+      try {
+        const savedSession = localStorage.getItem(STORAGE_KEYS.ACTIVE_SESSION);
+        if (savedSession) {
+          const parsed = JSON.parse(savedSession);
+          if (parsed && parsed.username === MASTER_ADMIN.username) {
+            state.activeSession = {
+              username: MASTER_ADMIN.username,
+              role: MASTER_ADMIN.role,
+              isMaster: true
+            };
+          } else if (parsed && parsed.username) {
+            const matchedAdmin = state.adminUsers.find(u => u.username === parsed.username);
+            if (matchedAdmin) {
+              state.activeSession = {
+                username: matchedAdmin.username,
+                role: matchedAdmin.role || 'Staff Admin',
+                isMaster: false
+              };
+            }
+          }
+        }
+      } catch (e) {
+        state.activeSession = null;
+      }
+
+      try {
+        const savedStaff = localStorage.getItem(STORAGE_KEYS.STAFF_SESSION);
+        if (savedStaff) {
+          const parsedStaff = JSON.parse(savedStaff);
+          const matchedStaff = state.adminUsers.find(u => u.username === parsedStaff?.username);
+          if (matchedStaff && parsedStaff?.loginDate === getTodayISODate()) {
+            state.staffSession = {
+              username: matchedStaff.username,
+              role: matchedStaff.role || 'Hospital Staff',
+              loginDate: parsedStaff.loginDate,
+              sessionLogId: parsedStaff.sessionLogId || null
+            };
+          } else {
+            localStorage.removeItem(STORAGE_KEYS.STAFF_SESSION);
+          }
+        }
+      } catch (e) {
+        state.staffSession = null;
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function clearPortalHashSafely() {
+      try {
+        if (window.location.hash === '#admin' || window.location.hash === '#staff') {
+          const cleanUrl = window.location.href.split('#')[0];
+          window.history.replaceState(null, '', cleanUrl);
+        }
+      } catch (err) {
+        try {
+          window.location.hash = '';
+        } catch (fallbackErr) {
+          // Ignore sandboxed navigation restriction
+        }
+      }
+    }
+
+    function copyTextSafely(textToCopy, successMessage) {
+      const textarea = document.createElement('textarea');
+      textarea.value = textToCopy;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMessage);
+      } catch (err) {
+        showToast('Could not copy automatically. Please copy manually.', 'error');
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    }
+
+    function toggleInputVisibility(inputId) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      if (!container) return;
+
+      const styles = {
+        success: 'bg-slate-900 text-white border-teal-500/40',
+        error: 'bg-rose-900 text-white border-rose-400/50',
+        info: 'bg-teal-900 text-white border-teal-400/40'
+      };
+
+      const badgeColors = {
+        success: 'bg-emerald-500',
+        error: 'bg-rose-500',
+        info: 'bg-sky-400'
+      };
+
+      const toast = document.createElement('div');
+      toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-2xl border shadow-xl text-xs sm:text-sm font-medium animate-toast ${styles[type] || styles.success}`;
+      toast.innerHTML = `
+        <span class="w-2.5 h-2.5 rounded-full shrink-0 ${badgeColors[type] || badgeColors.success}"></span>
+        <span class="flex-1">${escapeHtml(message)}</span>
+      `;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.25s ease';
+        setTimeout(() => toast.remove(), 260);
+      }, 3400);
+    }
+
+    function renderContactDetails() {
+      const c = state.contactInfo;
+
+      const topBarEmergency = document.getElementById('topBarEmergencyPhone');
+      if (topBarEmergency) {
+        topBarEmergency.textContent = c.emergencyPhone;
+        topBarEmergency.href = `tel:${c.emergencyPhone.replace(/\s+/g, '')}`;
+      }
+
+      const topBarTagline = document.getElementById('topBarTagline');
+      if (topBarTagline) topBarTagline.textContent = `Multi-Speciality Healthcare • ${c.campusSubtitle}`;
+
+      const nameEl = document.getElementById('contactHospitalName');
+      if (nameEl) nameEl.textContent = c.hospitalName;
+
+      const subEl = document.getElementById('contactHospitalSubtitle');
+      if (subEl) subEl.textContent = c.campusSubtitle;
+
+      const addrEl = document.getElementById('hospitalAddressText');
+      if (addrEl) addrEl.textContent = c.address;
+
+      const plusEl = document.getElementById('hospitalPlusCodeText');
+      if (plusEl) plusEl.textContent = c.plusCode || '8MFG+VV Mysuru, Karnataka';
+
+      const emergPhoneEl = document.getElementById('contactEmergencyPhone');
+      if (emergPhoneEl) {
+        emergPhoneEl.textContent = c.emergencyPhone;
+        emergPhoneEl.href = `tel:${c.emergencyPhone.replace(/\s+/g, '')}`;
+      }
+
+      const emergSubEl = document.getElementById('contactEmergencySub');
+      if (emergSubEl) emergSubEl.textContent = c.emergencySub;
+
+      const emailEl = document.getElementById('contactEmailLink');
+      if (emailEl) {
+        emailEl.textContent = c.email;
+        emailEl.href = `mailto:${c.email}`;
+      }
+
+      const hoursOpdEl = document.getElementById('contactHoursOpd');
+      if (hoursOpdEl) hoursOpdEl.textContent = c.hoursOpd;
+
+      const hoursVisEl = document.getElementById('contactHoursVisiting');
+      if (hoursVisEl) hoursVisEl.textContent = c.hoursVisiting;
+
+      const hoursEmergEl = document.getElementById('contactHoursEmergency');
+      if (hoursEmergEl) hoursEmergEl.textContent = c.hoursEmergency;
+
+      const fAddr = document.getElementById('footerAddressText');
+      if (fAddr) fAddr.textContent = c.address;
+
+      const fEmerg = document.getElementById('footerEmergencyPhone');
+      if (fEmerg) fEmerg.textContent = c.emergencyPhone;
+
+      const fEmail = document.getElementById('footerEmailText');
+      if (fEmail) fEmail.textContent = `Email: ${c.email}`;
+    }
+
+    function copyHospitalAddress() {
+      const fullLocation = `${state.contactInfo.address} (Plus Code: ${state.contactInfo.plusCode || '8MFG+VV Mysuru, Karnataka'})`;
+      copyTextSafely(fullLocation, 'Address & Plus Code copied to clipboard!');
+    }
+
+    function copyStaffPortalAddress() {
+      const baseUrl = window.location.href.split('#')[0];
+      copyTextSafely(`${baseUrl}#staff`, 'Staff Portal address (#staff) copied!');
+    }
+
+    function populateMasterContactEditorForm() {
+      const c = state.contactInfo;
+      const setVal = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.value = val || '';
+      };
+
+      setVal('editContactHospitalName', c.hospitalName);
+      setVal('editContactCampusSubtitle', c.campusSubtitle);
+      setVal('editContactAddress', c.address);
+      setVal('editContactEmergencyPhone', c.emergencyPhone);
+      setVal('editContactAmbulanceCode', c.ambulanceCode);
+      setVal('editContactEmergencySub', c.emergencySub);
+      setVal('editContactOpdPhone', c.opdPhone);
+      setVal('editContactEmail', c.email);
+      setVal('editContactHoursOpd', c.hoursOpd);
+      setVal('editContactHoursVisiting', c.hoursVisiting);
+      setVal('editContactHoursEmergency', c.hoursEmergency);
+    }
+
+    function handleSaveContactInfo(event) {
+      event.preventDefault();
+      if (!state.activeSession || !state.activeSession.isMaster) {
+        showToast('Access Denied: Only Master Admin (admin_alzahara) can edit contact details.', 'error');
+        return;
+      }
+
+      const getVal = (id) => (document.getElementById(id)?.value || '').trim();
+
+      state.contactInfo = {
+        hospitalName: getVal('editContactHospitalName') || DEFAULT_CONTACT_INFO.hospitalName,
+        campusSubtitle: getVal('editContactCampusSubtitle') || DEFAULT_CONTACT_INFO.campusSubtitle,
+        address: getVal('editContactAddress') || DEFAULT_CONTACT_INFO.address,
+        plusCode: state.contactInfo.plusCode || DEFAULT_CONTACT_INFO.plusCode,
+        emergencyPhone: getVal('editContactEmergencyPhone') || DEFAULT_CONTACT_INFO.emergencyPhone,
+        ambulanceCode: getVal('editContactAmbulanceCode') || DEFAULT_CONTACT_INFO.ambulanceCode,
+        emergencySub: getVal('editContactEmergencySub') || DEFAULT_CONTACT_INFO.emergencySub,
+        opdPhone: getVal('editContactOpdPhone') || DEFAULT_CONTACT_INFO.opdPhone,
+        email: getVal('editContactEmail') || DEFAULT_CONTACT_INFO.email,
+        hoursOpd: getVal('editContactHoursOpd') || DEFAULT_CONTACT_INFO.hoursOpd,
+        hoursVisiting: getVal('editContactHoursVisiting') || DEFAULT_CONTACT_INFO.hoursVisiting,
+        hoursEmergency: getVal('editContactHoursEmergency') || DEFAULT_CONTACT_INFO.hoursEmergency
+      };
+
+      saveToStorage(STORAGE_KEYS.CONTACT_INFO, state.contactInfo);
+      renderContactDetails();
+      showToast('Hospital contact details & address updated across the website!');
+    }
+
+    function resetContactInfoToDefault() {
+      if (!state.activeSession || !state.activeSession.isMaster) return;
+      state.contactInfo = Object.assign({}, DEFAULT_CONTACT_INFO);
+      saveToStorage(STORAGE_KEYS.CONTACT_INFO, state.contactInfo);
+      populateMasterContactEditorForm();
+      renderContactDetails();
+      showToast('Restored default Al-Zahara Hospital contact details.', 'info');
+    }
+
+    function getSpecialityIconSvg(iconType) {
+      const icons = {
+        heart: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>`,
+        brain: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`,
+        bone: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
+        child: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+        mother: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`,
+        scalpel: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>`,
+        stomach: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+        sparkle: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>`
+      };
+      return icons[iconType] || icons.heart;
+    }
+
+    function renderSpecialities() {
+      const grid = document.getElementById('specialitiesGrid');
+      const countLabel = document.getElementById('specialityCountLabel');
+      if (!grid) return;
+
+      if (countLabel) countLabel.textContent = state.specialities.length;
+
+      grid.innerHTML = state.specialities.map(spec => {
+        const docCount = state.doctors.filter(d => d.speciality === spec.name).length;
+        return `
+          <article class="group bg-slate-50/70 hover:bg-white rounded-3xl border border-slate-200/90 hover:border-teal-300 p-6 flex flex-col justify-between shadow-2xs hover:shadow-xl transition-all duration-200">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-teal-100/80 text-teal-800 group-hover:bg-teal-700 group-hover:text-white flex items-center justify-center transition-colors">
+                  ${getSpecialityIconSvg(spec.iconType)}
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-white border border-slate-200 text-[11px] font-semibold text-slate-600">
+                  ${docCount} ${docCount === 1 ? 'Doctor' : 'Doctors'}
+                </span>
+              </div>
+
+              <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-teal-800 transition-colors">
+                ${escapeHtml(spec.name)}
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+                ${escapeHtml(spec.shortDesc)}
+              </p>
+
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                ${(spec.facilities || []).slice(0, 2).map(fac => `
+                  <span class="text-[11px] px-2.5 py-0.5 rounded-lg bg-teal-50 text-teal-800 font-medium">
+                    ${escapeHtml(fac)}
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="pt-5 mt-5 border-t border-slate-200/70 flex items-center justify-between gap-2">
+              <button
+                type="button"
+                onclick="openSpecialityModal('${escapeHtml(spec.id)}')"
+                class="text-xs font-bold text-slate-700 hover:text-teal-800 inline-flex items-center gap-1 transition-colors"
+              >
+                <span>View Details</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+
+              <button
+                type="button"
+                onclick="filterDoctorsBySpecialityAndScroll('${escapeHtml(spec.name).replace(/'/g, "\\'")}')"
+                class="px-3 py-1.5 rounded-xl bg-white hover:bg-teal-700 text-teal-800 hover:text-white border border-teal-200 hover:border-teal-700 text-xs font-semibold transition-all"
+              >
+                View Doctors
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function openSpecialityModal(specId) {
+      const spec = state.specialities.find(s => s.id === specId);
+      if (!spec) return;
+
+      const docCount = state.doctors.filter(d => d.speciality === spec.name).length;
+
+      document.getElementById('specModalIcon').innerHTML = getSpecialityIconSvg(spec.iconType);
+      document.getElementById('specModalTitle').textContent = spec.name;
+      document.getElementById('specModalDescription').textContent = spec.fullDesc || spec.shortDesc;
+      document.getElementById('specModalDoctorCount').textContent = `${docCount} Senior ${docCount === 1 ? 'Specialist' : 'Specialists'} Available`;
+
+      document.getElementById('specModalFacilities').innerHTML = (spec.facilities || []).map(f => `
+        <span class="px-3 py-1 rounded-xl bg-teal-50 border border-teal-200/80 text-teal-900 text-xs font-semibold">
+          ✓ ${escapeHtml(f)}
+        </span>
+      `).join('');
+
+      document.getElementById('specModalViewDoctorsBtn').onclick = () => {
+        closeSpecialityModal();
+        filterDoctorsBySpecialityAndScroll(spec.name);
+      };
+
+      document.getElementById('specModalBookBtn').onclick = () => {
+        closeSpecialityModal();
+        prefillAppointmentAndScroll(spec.name, 'Any Available Specialist');
+      };
+
+      document.getElementById('specialityDetailModal')?.classList.remove('hidden');
+    }
+
+    function closeSpecialityModal() {
+      document.getElementById('specialityDetailModal')?.classList.add('hidden');
+    }
+
+    let pendingDoctorPhotoData = '';
+
+    function getDoctorAvatarSvg(doc) {
+      if (doc && doc.photoUrl) {
+        const safePhoto = escapeHtml(doc.photoUrl);
+        const safeName = escapeHtml(doc.name || 'Specialist Doctor');
+        const fallbackPlaceholder = `https://placehold.co/160x160/0f766e/ffffff?text=${encodeURIComponent((doc.name || 'DR').slice(0, 12))}`;
+        return `
+          <img
+            src="${safePhoto}"
+            onerror="this.onerror=null;this.src='${fallbackPlaceholder}';"
+            alt="${safeName}"
+            class="w-full h-full object-cover object-top"
+          />
+        `;
+      }
+
+      const palettes = {
+        teal: { bg: '#ccfbf1', coat: '#0f766e', skin: '#f1c27d', hair: '#1e293b' },
+        rose: { bg: '#ffe4e6', coat: '#be123c', skin: '#eab676', hair: '#0f172a' },
+        sky: { bg: '#e0f2fe', coat: '#0369a1', skin: '#f1c27d', hair: '#1e293b' },
+        indigo: { bg: '#e0e7ff', coat: '#4338ca', skin: '#e0ac69', hair: '#0f172a' },
+        emerald: { bg: '#d1fae5', coat: '#047857', skin: '#f1c27d', hair: '#1e293b' },
+        amber: { bg: '#fef3c7', coat: '#b45309', skin: '#e0ac69', hair: '#1e293b' }
+      };
+      const p = palettes[doc.avatarTone] || palettes.teal;
+      const isFemale = doc.gender === 'female';
+
+      return `
+        <svg viewBox="0 0 80 80" class="w-full h-full" fill="none">
+          <rect width="80" height="80" fill="${p.bg}" />
+          ${isFemale
+            ? `<path d="M22 36c0-11 8-19 18-19s18 8 18 19v18H22V36z" fill="${p.hair}" />`
+            : `<path d="M25 32c0-9 7-15 15-15s15 6 15 15v5H25v-5z" fill="${p.hair}" />`
+          }
+          <circle cx="40" cy="34" r="12" fill="${p.skin}" />
+          <path d="M16 80c2-15 12-22 24-22s22 7 24 22H16z" fill="#ffffff" />
+          <path d="M31 59l9 13 9-13" stroke="${p.coat}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M29 61c0 7 5 11 11 11s11-4 11-11" stroke="#334155" stroke-width="2" fill="none" />
+          <circle cx="51" cy="68" r="2.5" fill="${p.coat}" />
+        </svg>
+      `;
+    }
+
+    function updateDoctorPhotoPreviewBox(photoSource) {
+      const box = document.getElementById('doctorPhotoPreviewBox');
+      if (!box) return;
+      if (photoSource) {
+        box.innerHTML = `<img src="${escapeHtml(photoSource)}" alt="Doctor Preview" class="w-full h-full object-cover object-top" />`;
+      } else {
+        box.innerHTML = `<span class="text-[10px] font-semibold text-slate-400 text-center px-1">Default Avatar</span>`;
+      }
+    }
+
+    function handleDoctorPhotoFileSelect(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        showToast('Please select a valid image file (JPG, PNG, or WebP).', 'error');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = new Image();
+        img.onload = function () {
+          const canvas = document.createElement('canvas');
+          const maxDim = 360;
+          let w = img.width;
+          let h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+          pendingDoctorPhotoData = compressedDataUrl;
+          const urlInput = document.getElementById('newDocPhotoUrl');
+          if (urlInput) urlInput.value = '';
+          updateDoctorPhotoPreviewBox(compressedDataUrl);
+          showToast('Doctor photo loaded and ready to save!');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleDoctorPhotoUrlInput(urlVal) {
+      const trimmed = (urlVal || '').trim();
+      pendingDoctorPhotoData = trimmed;
+      const fileInput = document.getElementById('newDocPhotoFile');
+      if (fileInput) fileInput.value = '';
+      updateDoctorPhotoPreviewBox(trimmed);
+    }
+
+    function clearDoctorPhotoSelection() {
+      pendingDoctorPhotoData = '';
+      const fileInput = document.getElementById('newDocPhotoFile');
+      const urlInput = document.getElementById('newDocPhotoUrl');
+      if (fileInput) fileInput.value = '';
+      if (urlInput) urlInput.value = '';
+      updateDoctorPhotoPreviewBox('');
+    }
+
+    function syncSpecialitySelectOptions() {
+      const filterSelect = document.getElementById('doctorSpecialitySelect');
+      const apptSelect = document.getElementById('appointmentSpeciality');
+      const adminDocSpecSelect = document.getElementById('newDocSpeciality');
+
+      const specOptionsHtml = state.specialities.map(s =>
+        `<option value="${escapeHtml(s.name)}">${escapeHtml(s.name)}</option>`
+      ).join('');
+
+      if (filterSelect) {
+        const prev = filterSelect.value || 'ALL';
+        filterSelect.innerHTML = `<option value="ALL">All Medical Specialities</option>${specOptionsHtml}`;
+        filterSelect.value = state.specialities.some(s => s.name === prev) ? prev : 'ALL';
+      }
+
+      if (apptSelect) {
+        const prevAppt = apptSelect.value || 'General Inquiry';
+        apptSelect.innerHTML = `<option value="General Inquiry">General Inquiry / Not Sure</option>${specOptionsHtml}`;
+        apptSelect.value = state.specialities.some(s => s.name === prevAppt) ? prevAppt : 'General Inquiry';
+      }
+
+      if (adminDocSpecSelect) {
+        adminDocSpecSelect.innerHTML = specOptionsHtml;
+      }
+
+      syncAppointmentDoctorOptions(apptSelect ? apptSelect.value : 'General Inquiry');
+    }
+
+    function syncAppointmentDoctorOptions(selectedSpec = 'General Inquiry') {
+      const doctorSelect = document.getElementById('appointmentDoctor');
+      if (!doctorSelect) return;
+
+      const filtered = selectedSpec && selectedSpec !== 'General Inquiry'
+        ? state.doctors.filter(d => d.speciality === selectedSpec)
+        : state.doctors;
+
+      const options = filtered.map(d =>
+        `<option value="${escapeHtml(d.name)}">${escapeHtml(d.name)} (${escapeHtml(d.speciality)})</option>`
+      ).join('');
+
+      doctorSelect.innerHTML = `<option value="Any Available Specialist">Any Available Specialist</option>${options}`;
+    }
+
+    function renderDoctorFilterPills() {
+      const container = document.getElementById('doctorFilterPills');
+      if (!container) return;
+
+      const allSpecs = ['ALL', ...state.specialities.map(s => s.name)];
+      container.innerHTML = allSpecs.map(specName => {
+        const isActive = state.selectedDoctorFilter === specName;
+        const label = specName === 'ALL' ? 'All Departments' : specName;
+        return `
+          <button
+            type="button"
+            onclick="setDoctorSpecialityFilter('${escapeHtml(specName).replace(/'/g, "\\'")}')"
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+              isActive
+                ? 'bg-teal-700 text-white shadow-2xs'
+                : 'bg-slate-100 text-slate-600 hover:bg-teal-50 hover:text-teal-800'
+            }"
+          >
+            ${escapeHtml(label)}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function setDoctorSpecialityFilter(specialityName) {
+      state.selectedDoctorFilter = specialityName || 'ALL';
+      const select = document.getElementById('doctorSpecialitySelect');
+      if (select) select.value = state.selectedDoctorFilter;
+      renderDoctorFilterPills();
+      renderDoctors();
+    }
+
+    function filterDoctorsBySpecialityAndScroll(specialityName) {
+      setDoctorSpecialityFilter(specialityName);
+      document.getElementById('doctors')?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetDoctorFilters() {
+      state.selectedDoctorFilter = 'ALL';
+      state.doctorSearchQuery = '';
+      const searchInput = document.getElementById('doctorSearchInput');
+      const select = document.getElementById('doctorSpecialitySelect');
+      if (searchInput) searchInput.value = '';
+      if (select) select.value = 'ALL';
+      renderDoctorFilterPills();
+      renderDoctors();
+    }
+
+    function renderDoctors() {
+      const grid = document.getElementById('doctorsGrid');
+      const emptyState = document.getElementById('doctorsEmptyState');
+      const summaryEl = document.getElementById('doctorsFilterSummary');
+      const badgeEl = document.getElementById('doctorsCountBadge');
+      if (!grid) return;
+
+      const query = state.doctorSearchQuery.trim().toLowerCase();
+      const specFilter = state.selectedDoctorFilter;
+
+      const filteredDoctors = state.doctors.filter(doc => {
+        const matchesSpec = specFilter === 'ALL' || doc.speciality === specFilter;
+        const matchesQuery = !query ||
+          doc.name.toLowerCase().includes(query) ||
+          doc.speciality.toLowerCase().includes(query) ||
+          doc.qualifications.toLowerCase().includes(query) ||
+          (doc.focus && doc.focus.toLowerCase().includes(query));
+        return matchesSpec && matchesQuery;
+      });
+
+      if (badgeEl) {
+        badgeEl.textContent = `${filteredDoctors.length} ${filteredDoctors.length === 1 ? 'Doctor' : 'Doctors'}`;
+      }
+
+      if (summaryEl) {
+        summaryEl.textContent = specFilter === 'ALL'
+          ? 'Showing all specialist doctors across departments'
+          : `Filtered by department: ${specFilter}`;
+      }
+
+      if (filteredDoctors.length === 0) {
+        grid.innerHTML = '';
+        emptyState?.classList.remove('hidden');
+        return;
+      }
+
+      emptyState?.classList.add('hidden');
+      grid.innerHTML = filteredDoctors.map(doc => `
+        <article class="bg-white rounded-3xl border border-slate-200/90 hover:border-teal-300 p-5 flex flex-col justify-between shadow-2xs hover:shadow-xl transition-all">
+          <div>
+            <div class="flex items-center gap-3.5 mb-4">
+              <div class="w-16 h-16 rounded-2xl overflow-hidden border border-slate-200 shrink-0">
+                ${getDoctorAvatarSvg(doc)}
+              </div>
+              <div class="min-w-0">
+                <span class="inline-block px-2.5 py-0.5 rounded-full bg-teal-50 text-teal-800 text-[11px] font-bold">
+                  ${escapeHtml(doc.speciality)}
+                </span>
+                <h3 class="font-display font-bold text-base text-slate-900 mt-1 truncate" title="${escapeHtml(doc.name)}">
+                  ${escapeHtml(doc.name)}
+                </h3>
+                <p class="text-xs text-slate-500 truncate">${escapeHtml(doc.qualifications)}</p>
+              </div>
+            </div>
+
+            <div class="space-y-2 text-xs text-slate-600 bg-slate-50/90 p-3.5 rounded-2xl border border-slate-100">
+              <div class="flex items-center justify-between">
+                <span class="text-slate-500">Experience:</span>
+                <span class="font-bold text-slate-800">${escapeHtml(doc.experience)}+ Years</span>
+              </div>
+              <div>
+                <span class="text-slate-500 block">OPD Consultation Schedule:</span>
+                <span class="font-semibold text-emerald-800 mt-0.5 block">${escapeHtml(doc.timings)}</span>
+              </div>
+            </div>
+
+            <p class="text-xs text-slate-500 mt-3 leading-relaxed">
+              <strong class="text-slate-700">Focus:</strong> ${escapeHtml(doc.focus || doc.speciality)}
+            </p>
+          </div>
+
+          <div class="pt-4 mt-4 border-t border-slate-100">
+            <button
+              type="button"
+              onclick="prefillAppointmentAndScroll('${escapeHtml(doc.speciality).replace(/'/g, "\\'")}', '${escapeHtml(doc.name).replace(/'/g, "\\'")}')"
+              class="w-full py-2.5 px-4 rounded-xl bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold shadow-2xs transition-colors"
+            >
+              Book Consultation
+            </button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    const appointmentFormTouched = {
+      patientName: false,
+      patientPhone: false,
+      patientEmail: false,
+      appointmentDate: false,
+      patientMessage: false
+    };
+
+    function setDefaultAppointmentDate() {
+      const dateInput = document.getElementById('appointmentDate');
+      if (!dateInput) return;
+      const today = getTodayISODate();
+      dateInput.min = today;
+      if (!dateInput.value) dateInput.value = today;
+    }
+
+    function validateAppointmentField(fieldId) {
+      const today = getTodayISODate();
+
+      if (fieldId === 'patientName') {
+        const val = (document.getElementById('patientName')?.value || '').trim();
+        if (!val) return 'Patient full name is required.';
+        if (val.length < 2) return 'Please enter at least 2 characters for the patient name.';
+        if (!/^[A-Za-z][A-Za-z\s.'-]{1,79}$/.test(val) || !/[A-Za-z]{2,}/.test(val)) {
+          return 'Enter a valid full name using letters only (no numbers or special symbols).';
+        }
+        return '';
+      }
+
+      if (fieldId === 'patientPhone') {
+        const raw = (document.getElementById('patientPhone')?.value || '').trim();
+        if (!raw) return 'Phone or WhatsApp number is required.';
+        const cleaned = raw.replace(/[\s\-().]/g, '');
+        if (!/^(?:\+?91|0)?[6-9]\d{9}$/.test(cleaned)) {
+          return 'Enter a valid 10-digit Indian mobile number (e.g., +91 98450 12345).';
+        }
+        return '';
+      }
+
+      if (fieldId === 'patientEmail') {
+        const val = (document.getElementById('patientEmail')?.value || '').trim().toLowerCase();
+        if (!val) return '';
+        if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(val)) {
+          return 'Enter a valid email address (e.g., name@gmail.com) or leave blank.';
+        }
+        const [localPart, domain] = val.split('@');
+        if (!localPart || !domain) {
+          return 'Enter a valid email address.';
+        }
+        if (localPart.startsWith('.') || localPart.endsWith('.') || localPart.includes('..')) {
+          return 'Email username cannot start, end, or have consecutive dots.';
+        }
+        if (domain.startsWith('.') || domain.endsWith('.') || domain.includes('..')) {
+          return 'Email domain format is invalid.';
+        }
+        if (domain.startsWith('gmail.') && domain !== 'gmail.com') {
+          return 'Invalid Gmail address. Please use @gmail.com (not @' + domain + ').';
+        }
+        const commonProviders = ['yahoo', 'outlook', 'hotmail', 'icloud'];
+        for (const provider of commonProviders) {
+          if (domain === provider + '.cm') {
+            return `Did you mean @${provider}.com? Please check the domain extension.`;
+          }
+        }
+        return '';
+      }
+
+      if (fieldId === 'appointmentDate') {
+        const val = (document.getElementById('appointmentDate')?.value || '').trim();
+        if (!val) return 'Please select a preferred consultation date.';
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(val)) return 'Please enter a valid calendar date.';
+        if (val < today) return `Consultation date cannot be in the past (${today} or later).`;
+        return '';
+      }
+
+      if (fieldId === 'patientMessage') {
+        const raw = document.getElementById('patientMessage')?.value || '';
+        if (raw.length > 0 && raw.trim().length === 0) {
+          return 'Message cannot contain only blank spaces.';
+        }
+        if (raw.trim().length > 0 && raw.trim().length < 5) {
+          return 'Please enter at least 5 characters if adding a message, or leave blank.';
+        }
+        return '';
+      }
+
+      return '';
+    }
+
+    function applyAppointmentFieldErrorUI(fieldId, showError) {
+      const inputEl = document.getElementById(fieldId);
+      const errorEl = document.getElementById(`${fieldId}Error`);
+      if (!inputEl) return '';
+
+      const errorMsg = validateAppointmentField(fieldId);
+      const shouldDisplay = Boolean(errorMsg) && showError;
+
+      if (errorEl) {
+        if (shouldDisplay) {
+          errorEl.textContent = errorMsg;
+          errorEl.classList.remove('hidden');
+        } else {
+          errorEl.textContent = '';
+          errorEl.classList.add('hidden');
+        }
+      }
+
+      if (shouldDisplay) {
+        inputEl.classList.remove('border-slate-200', 'focus:ring-teal-600/20', 'focus:border-teal-600');
+        inputEl.classList.add('border-rose-500', 'bg-rose-50/30', 'focus:ring-rose-500/20', 'focus:border-rose-500');
+        inputEl.setAttribute('aria-invalid', 'true');
+      } else {
+        inputEl.classList.add('border-slate-200', 'focus:ring-teal-600/20', 'focus:border-teal-600');
+        inputEl.classList.remove('border-rose-500', 'bg-rose-50/30', 'focus:ring-rose-500/20', 'focus:border-rose-500');
+        inputEl.removeAttribute('aria-invalid');
+      }
+
+      return errorMsg;
+    }
+
+    function evaluateAppointmentFormValidity(forceShowAllErrors = false) {
+      const fieldIds = ['patientName', 'patientPhone', 'patientEmail', 'appointmentDate', 'patientMessage'];
+      let firstInvalidId = null;
+
+      fieldIds.forEach((id) => {
+        if (forceShowAllErrors) {
+          appointmentFormTouched[id] = true;
+        }
+        const err = applyAppointmentFieldErrorUI(id, appointmentFormTouched[id]);
+        if (err && !firstInvalidId) {
+          firstInvalidId = id;
+        }
+      });
+
+      const specVal = (document.getElementById('appointmentSpeciality')?.value || '').trim();
+      const docVal = (document.getElementById('appointmentDoctor')?.value || '').trim();
+      const selectsValid = Boolean(specVal) && Boolean(docVal);
+
+      const isFormValid = !firstInvalidId && selectsValid;
+      const submitBtn = document.getElementById('appointmentSubmitBtn');
+      if (submitBtn) {
+        submitBtn.disabled = !isFormValid;
+        submitBtn.setAttribute('aria-disabled', String(!isFormValid));
+        if (isFormValid) {
+          submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        } else {
+          submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+      }
+
+      return { isFormValid, firstInvalidId };
+    }
+
+    function setupAppointmentFormValidation() {
+      const fieldIds = ['patientName', 'patientPhone', 'patientEmail', 'appointmentDate', 'patientMessage'];
+      fieldIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const eventName = id === 'appointmentDate' ? 'change' : 'input';
+        el.addEventListener(eventName, () => {
+          appointmentFormTouched[id] = true;
+          evaluateAppointmentFormValidity(false);
+        });
+        el.addEventListener('blur', () => {
+          appointmentFormTouched[id] = true;
+          evaluateAppointmentFormValidity(false);
+        });
+      });
+
+      document.getElementById('appointmentSpeciality')?.addEventListener('change', () => {
+        evaluateAppointmentFormValidity(false);
+      });
+      document.getElementById('appointmentDoctor')?.addEventListener('change', () => {
+        evaluateAppointmentFormValidity(false);
+      });
+
+      evaluateAppointmentFormValidity(false);
+    }
+
+    function prefillAppointmentAndScroll(specialityName, doctorName) {
+      const specSelect = document.getElementById('appointmentSpeciality');
+      const docSelect = document.getElementById('appointmentDoctor');
+
+      if (specSelect && specialityName) {
+        specSelect.value = specialityName;
+        syncAppointmentDoctorOptions(specialityName);
+      }
+      if (docSelect && doctorName) {
+        docSelect.value = doctorName;
+      }
+
+      evaluateAppointmentFormValidity(false);
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        document.getElementById('patientName')?.focus();
+      }, 450);
+    }
+
+    function handleAppointmentFormSubmit(event) {
+      event.preventDefault();
+
+      const { isFormValid, firstInvalidId } = evaluateAppointmentFormValidity(true);
+      if (!isFormValid) {
+        const firstErrorMsg = firstInvalidId
+          ? validateAppointmentField(firstInvalidId)
+          : 'Please complete all required fields with valid credentials.';
+        showToast(firstErrorMsg, 'error');
+        if (firstInvalidId) {
+          document.getElementById(firstInvalidId)?.focus();
+        }
+        return;
+      }
+
+      const patientName = document.getElementById('patientName').value.trim().replace(/\s+/g, ' ');
+      const rawPhone = document.getElementById('patientPhone').value.trim();
+      const digitsOnly = rawPhone.replace(/\D/g, '');
+      const normalizedTenDigit = digitsOnly.slice(-10);
+      const patientPhone = `+91 ${normalizedTenDigit.slice(0, 5)} ${normalizedTenDigit.slice(5)}`;
+      const patientEmail = document.getElementById('patientEmail').value.trim().toLowerCase() || 'Not provided';
+      const preferredDate = document.getElementById('appointmentDate').value;
+      const speciality = document.getElementById('appointmentSpeciality').value;
+      const doctor = document.getElementById('appointmentDoctor').value;
+      const message = document.getElementById('patientMessage').value.trim() || 'General OPD Consultation';
+
+      const refId = 'INQ-' + new Date().getFullYear() + '-' + Math.floor(100 + Math.random() * 900);
+      const submittedAt = `${getTodayISODate()} ${formatDisplayTime(new Date())}`;
+
+      const newInquiry = {
+        id: refId,
+        patientName,
+        patientPhone,
+        patientEmail,
+        speciality,
+        doctor,
+        preferredDate,
+        message,
+        submittedAt,
+        status: 'Pending'
+      };
+
+      state.inquiries.unshift(newInquiry);
+      saveToStorage(STORAGE_KEYS.INQUIRIES, state.inquiries);
+
+      const banner = document.getElementById('appointmentSuccessBanner');
+      const details = document.getElementById('appointmentSuccessDetails');
+      if (banner && details) {
+        details.textContent = `Reference ID: ${refId} • ${patientName} (${speciality} – ${doctor}) on ${preferredDate}. Our OPD desk will call ${patientPhone} shortly.`;
+        banner.classList.remove('hidden');
+      }
+
+      document.getElementById('contactAppointmentForm').reset();
+      Object.keys(appointmentFormTouched).forEach((k) => {
+        appointmentFormTouched[k] = false;
+      });
+      setDefaultAppointmentDate();
+      evaluateAppointmentFormValidity(false);
+      renderStaffInquiriesList();
+      updateStaffCounters();
+      showToast(`Appointment request (${refId}) submitted!`);
+    }
+
+    function handleAdminNavClick(event) {
+      if (event) event.preventDefault();
+      window.location.hash = 'admin';
+      if (state.activeSession) {
+        openAdminDashboardOverlay();
+      } else {
+        openAdminLoginModal();
+      }
+    }
+
+    function openAdminLoginModal() {
+      const modal = document.getElementById('adminLoginModal');
+      const errorBox = document.getElementById('adminLoginError');
+      if (errorBox) errorBox.classList.add('hidden');
+      modal?.classList.remove('hidden');
+      setTimeout(() => {
+        document.getElementById('adminUsernameInput')?.focus();
+      }, 100);
+    }
+
+    function closeAdminLoginModal() {
+      document.getElementById('adminLoginModal')?.classList.add('hidden');
+      if (!state.activeSession) {
+        clearPortalHashSafely();
+      }
+    }
+
+    function handleAdminLoginSubmit(event) {
+      event.preventDefault();
+
+      const username = document.getElementById('adminUsernameInput').value.trim();
+      const password = document.getElementById('adminPasswordInput').value;
+      const errorBox = document.getElementById('adminLoginError');
+
+      if (username === MASTER_ADMIN.username && password === MASTER_ADMIN.password) {
+        state.activeSession = {
+          username: MASTER_ADMIN.username,
+          role: MASTER_ADMIN.role,
+          isMaster: true
+        };
+      } else {
+        const secondaryUser = state.adminUsers.find(
+          u => u.username === username && u.password === password
+        );
+        if (secondaryUser) {
+          state.activeSession = {
+            username: secondaryUser.username,
+            role: secondaryUser.role || 'Staff Admin',
+            isMaster: false
+          };
+        } else {
+          if (errorBox) {
+            errorBox.textContent = 'Invalid Admin Username or Password. Please check your credentials.';
+            errorBox.classList.remove('hidden');
+          }
+          return;
+        }
+      }
+
+      saveToStorage(STORAGE_KEYS.ACTIVE_SESSION, state.activeSession);
+      document.getElementById('adminLoginForm').reset();
+      if (errorBox) errorBox.classList.add('hidden');
+      document.getElementById('adminLoginModal').classList.add('hidden');
+
+      updateHeaderAdminButton();
+      openAdminDashboardOverlay();
+      showToast(`Signed in as ${state.activeSession.username} (${state.activeSession.role})`);
+    }
+
+    function logoutAdmin() {
+      state.activeSession = null;
+      state.revealedPasswords = {};
+      localStorage.removeItem(STORAGE_KEYS.ACTIVE_SESSION);
+      closeAdminDashboardOverlay();
+      updateHeaderAdminButton();
+      clearPortalHashSafely();
+      showToast('Signed out of Admin Portal.', 'info');
+    }
+
+    function updateHeaderAdminButton() {
+      const btn = document.getElementById('headerAdminBtn');
+      const btnText = document.getElementById('headerAdminBtnText');
+      if (!btn || !btnText) return;
+
+      if (state.activeSession) {
+        btnText.textContent = state.activeSession.isMaster
+          ? 'Admin (Master)'
+          : `Admin (${state.activeSession.username})`;
+        btn.classList.remove('bg-slate-50', 'text-slate-700', 'border-slate-200');
+        btn.classList.add('bg-teal-700', 'text-white', 'border-teal-700');
+      } else {
+        btnText.textContent = 'Admin Login';
+        btn.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
+        btn.classList.remove('bg-teal-700', 'text-white', 'border-teal-700');
+      }
+    }
+
+    function openAdminDashboardOverlay() {
+      if (!state.activeSession) {
+        openAdminLoginModal();
+        return;
+      }
+
+      const dashboardModal = document.getElementById('adminDashboardModal');
+      const sessionBadge = document.getElementById('adminSessionBadge');
+      const restrictedBox = document.getElementById('secondaryUserRestrictedBox');
+      const restrictedUsernameEl = document.getElementById('restrictedCurrentUsername');
+      const masterUsersContainer = document.getElementById('masterUserManagementContainer');
+
+      const contactRestrictedBox = document.getElementById('contactRestrictedBox');
+      const masterContactContainer = document.getElementById('masterContactEditorContainer');
+
+      if (sessionBadge) {
+        if (state.activeSession.isMaster) {
+          sessionBadge.textContent = `${state.activeSession.username} • Master Super-Admin`;
+          sessionBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30';
+        } else {
+          sessionBadge.textContent = `${state.activeSession.username} • ${state.activeSession.role}`;
+          sessionBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-200 border border-amber-400/30';
+        }
+      }
+
+      if (state.activeSession.isMaster) {
+        restrictedBox?.classList.add('hidden');
+        masterUsersContainer?.classList.remove('hidden');
+        contactRestrictedBox?.classList.add('hidden');
+        masterContactContainer?.classList.remove('hidden');
+        renderAdminUsersTable();
+        populateMasterContactEditorForm();
+      } else {
+        masterUsersContainer?.classList.add('hidden');
+        restrictedBox?.classList.remove('hidden');
+        if (restrictedUsernameEl) restrictedUsernameEl.textContent = state.activeSession.username;
+        masterContactContainer?.classList.add('hidden');
+        contactRestrictedBox?.classList.remove('hidden');
+      }
+
+      renderAdminDoctorsList();
+      renderAdminSpecialitiesList();
+      renderAdminStaffLogsTab();
+      updateAdminCounters();
+
+      switchAdminTab(state.activeSession.isMaster ? 'users' : 'doctors');
+      dashboardModal?.classList.remove('hidden');
+    }
+
+    function closeAdminDashboardOverlay() {
+      document.getElementById('adminDashboardModal')?.classList.add('hidden');
+      clearPortalHashSafely();
+    }
+
+    function switchAdminTab(tabName) {
+      state.currentAdminTab = tabName;
+
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        const isTarget = btn.getAttribute('data-admin-tab') === tabName;
+        if (isTarget) {
+          btn.classList.add('bg-white', 'text-teal-800', 'border-teal-700');
+          btn.classList.remove('text-slate-500', 'border-transparent', 'hover:text-slate-800');
+        } else {
+          btn.classList.remove('bg-white', 'text-teal-800', 'border-teal-700');
+          btn.classList.add('text-slate-500', 'border-transparent', 'hover:text-slate-800');
+        }
+      });
+
+      const panels = {
+        users: document.getElementById('adminTabUsers'),
+        contact: document.getElementById('adminTabContact'),
+        doctors: document.getElementById('adminTabDoctors'),
+        specialities: document.getElementById('adminTabSpecialities'),
+        staffLogs: document.getElementById('adminTabStaffLogs')
+      };
+
+      Object.entries(panels).forEach(([key, el]) => {
+        if (!el) return;
+        if (key === tabName) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+
+      if (tabName === 'staffLogs') {
+        renderAdminStaffLogsTab();
+      }
+    }
+
+    function updateAdminCounters() {
+      const docsCount = document.getElementById('adminDoctorsCount');
+      const specsCount = document.getElementById('adminSpecsCount');
+      const staffLogsTabCounter = document.getElementById('staffLogsTabCounter');
+
+      if (docsCount) docsCount.textContent = `${state.doctors.length} Doctors`;
+      if (specsCount) specsCount.textContent = `${state.specialities.length} Specialities`;
+      if (staffLogsTabCounter) {
+        staffLogsTabCounter.textContent = state.attendanceRecords.length + state.staffActivityLogs.length;
+      }
+    }
+
+    function updateStaffCounters() {
+      const apptTabCounter = document.getElementById('staffAppointmentsTabCounter');
+      const apptSummary = document.getElementById('staffInquiriesSummary');
+
+      if (apptTabCounter) apptTabCounter.textContent = state.inquiries.length;
+      if (apptSummary) {
+        apptSummary.textContent = `${state.inquiries.length} Total ${state.inquiries.length === 1 ? 'Request' : 'Requests'}`;
+      }
+    }
+
+    function resetAdminStaffLogsFilter() {
+      state.adminStaffLogDateFilter = '';
+      state.adminStaffLogUserFilter = 'ALL';
+      const dateInput = document.getElementById('adminStaffLogDateFilter');
+      const userSelect = document.getElementById('adminStaffLogUserFilter');
+      if (dateInput) dateInput.value = '';
+      if (userSelect) userSelect.value = 'ALL';
+      renderAdminStaffLogsTab();
+    }
+
+    function renderAdminStaffLogsTab() {
+      const userSelect = document.getElementById('adminStaffLogUserFilter');
+      if (userSelect) {
+        const knownUsernames = new Set([
+          ...state.adminUsers.map(u => u.username),
+          ...state.attendanceRecords.map(r => r.staffUsername),
+          ...state.staffActivityLogs.map(l => l.staffUsername)
+        ]);
+        const currentVal = state.adminStaffLogUserFilter || 'ALL';
+        userSelect.innerHTML = `<option value="ALL">All Staff Members</option>` +
+          Array.from(knownUsernames).map(uname =>
+            `<option value="${escapeHtml(uname)}">${escapeHtml(uname)}</option>`
+          ).join('');
+        userSelect.value = knownUsernames.has(currentVal) ? currentVal : 'ALL';
+      }
+
+      const dateFilter = state.adminStaffLogDateFilter;
+      const userFilter = state.adminStaffLogUserFilter;
+
+      const filteredAttendance = state.attendanceRecords.filter(rec => {
+        const matchDate = !dateFilter || rec.dutyDate === dateFilter;
+        const matchUser = userFilter === 'ALL' || rec.staffUsername === userFilter;
+        return matchDate && matchUser;
+      });
+
+      const filteredLoginLogs = state.staffActivityLogs.filter(log => {
+        const matchDate = !dateFilter || log.date === dateFilter;
+        const matchUser = userFilter === 'ALL' || log.staffUsername === userFilter;
+        return matchDate && matchUser;
+      });
+
+      const activeSessionsCount = state.staffActivityLogs.filter(l => !l.logoutTime).length;
+      const kpiAtt = document.getElementById('kpiTotalAttendanceCount');
+      const kpiLogins = document.getElementById('kpiTotalLoginsCount');
+      const kpiActive = document.getElementById('kpiActiveStaffCount');
+      if (kpiAtt) kpiAtt.textContent = filteredAttendance.length;
+      if (kpiLogins) kpiLogins.textContent = filteredLoginLogs.length;
+      if (kpiActive) kpiActive.textContent = activeSessionsCount;
+
+      const attBadge = document.getElementById('adminFilteredAttendanceBadge');
+      const logBadge = document.getElementById('adminFilteredLoginLogsBadge');
+      if (attBadge) attBadge.textContent = `${filteredAttendance.length} ${filteredAttendance.length === 1 ? 'Record' : 'Records'}`;
+      if (logBadge) logBadge.textContent = `${filteredLoginLogs.length} ${filteredLoginLogs.length === 1 ? 'Session' : 'Sessions'}`;
+
+      const attTbody = document.getElementById('adminStaffAttendanceTableBody');
+      if (attTbody) {
+        if (filteredAttendance.length === 0) {
+          attTbody.innerHTML = `
+            <tr>
+              <td colspan="4" class="py-8 px-4 text-center text-xs text-slate-500">
+                No staff attendance records found for the selected filter.
+              </td>
+            </tr>
+          `;
+        } else {
+          attTbody.innerHTML = filteredAttendance.map(rec => `
+            <tr class="hover:bg-slate-50/70">
+              <td class="py-3 px-3.5">
+                <div class="font-mono font-bold text-slate-900">${escapeHtml(rec.staffUsername)}</div>
+                <div class="text-[10px] text-slate-500">${escapeHtml(rec.staffRole || 'Hospital Staff')}</div>
+              </td>
+              <td class="py-3 px-3.5 text-slate-700">
+                <span class="font-semibold">${escapeHtml(rec.dutyDate)}</span>
+                <span class="block text-[11px] text-slate-500">${escapeHtml(rec.checkInTime)}</span>
+              </td>
+              <td class="py-3 px-3.5">
+                <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                  ${escapeHtml(rec.status)}
+                </span>
+              </td>
+              <td class="py-3 px-3.5 text-slate-600">${escapeHtml(rec.note || 'Regular Shift')}</td>
+            </tr>
+          `).join('');
+        }
+      }
+
+      const logTbody = document.getElementById('adminStaffLoginHistoryTableBody');
+      if (logTbody) {
+        if (filteredLoginLogs.length === 0) {
+          logTbody.innerHTML = `
+            <tr>
+              <td colspan="4" class="py-8 px-4 text-center text-xs text-slate-500">
+                No staff login/logout activity recorded for the selected filter.
+              </td>
+            </tr>
+          `;
+        } else {
+          logTbody.innerHTML = filteredLoginLogs.map(log => {
+            const isOnline = !log.logoutTime;
+            return `
+              <tr class="hover:bg-slate-50/70">
+                <td class="py-3 px-3.5">
+                  <div class="font-mono font-bold text-slate-900">${escapeHtml(log.staffUsername)}</div>
+                  <div class="text-[10px] text-slate-500">${escapeHtml(log.staffRole || 'Hospital Staff')}</div>
+                </td>
+                <td class="py-3 px-3.5 font-semibold text-slate-700">${escapeHtml(log.date)}</td>
+                <td class="py-3 px-3.5 font-mono text-teal-800 font-semibold">${escapeHtml(log.loginTime)}</td>
+                <td class="py-3 px-3.5">
+                  ${isOnline
+                    ? `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                        Active Now
+                      </span>`
+                    : `<span class="font-mono text-slate-700 font-semibold">${escapeHtml(log.logoutTime)}</span>`
+                  }
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+      }
+    }
+
+    function handleStaffNavClick(event) {
+      if (event) event.preventDefault();
+      window.location.hash = 'staff';
+      if (state.staffSession) {
+        openStaffDashboardOverlay();
+      } else {
+        openStaffLoginModal();
+      }
+    }
+
+    function openStaffLoginModal() {
+      const modal = document.getElementById('staffLoginModal');
+      const errorBox = document.getElementById('staffLoginError');
+      const loginDateInput = document.getElementById('staffLoginDateInput');
+      const todayIso = getTodayISODate();
+
+      if (loginDateInput) {
+        loginDateInput.min = todayIso;
+        loginDateInput.max = todayIso;
+        loginDateInput.value = todayIso;
+      }
+
+      if (errorBox) errorBox.classList.add('hidden');
+      if (modal) modal.classList.remove('hidden');
+      setTimeout(() => {
+        document.getElementById('staffUsernameInput')?.focus();
+      }, 100);
+    }
+
+    function closeStaffLoginModal() {
+      document.getElementById('staffLoginModal')?.classList.add('hidden');
+      if (!state.staffSession) {
+        clearPortalHashSafely();
+      }
+    }
+
+    function handleStaffLoginSubmit(event) {
+      event.preventDefault();
+
+      const username = document.getElementById('staffUsernameInput').value.trim();
+      const password = document.getElementById('staffPasswordInput').value;
+      const selectedDate = document.getElementById('staffLoginDateInput')?.value || '';
+      const routeConfirm = document.getElementById('staffPortalRouteConfirm').value.trim();
+      const errorBox = document.getElementById('staffLoginError');
+      const todayIso = getTodayISODate();
+
+      if (selectedDate !== todayIso) {
+        if (errorBox) {
+          errorBox.textContent = `Date Restriction: Staff login is allowed ONLY for today's current date (${todayIso}).`;
+          errorBox.classList.remove('hidden');
+        }
+        return;
+      }
+
+      if (routeConfirm !== '#staff') {
+        if (errorBox) {
+          errorBox.textContent = 'Invalid Staff Portal Address. Must be #staff.';
+          errorBox.classList.remove('hidden');
+        }
+        return;
+      }
+
+      const matchedStaff = state.adminUsers.find(
+        u => u.username === username && u.password === password
+      );
+
+      if (!matchedStaff) {
+        if (errorBox) {
+          errorBox.textContent = state.adminUsers.length === 0
+            ? 'No staff accounts have been created yet. Ask the Master Admin (admin_alzahara) to create your Staff Username & Password first.'
+            : 'Invalid Staff Username or Password. Only credentials created by the Master Admin are accepted.';
+          errorBox.classList.remove('hidden');
+        }
+        return;
+      }
+
+      const sessionLogId = 'SLOG-' + Date.now();
+      const loginTimeStr = formatDisplayTime(new Date());
+
+      const newActivityLog = {
+        id: sessionLogId,
+        staffUsername: matchedStaff.username,
+        staffRole: matchedStaff.role || 'Hospital Staff',
+        date: todayIso,
+        loginTime: loginTimeStr,
+        logoutTime: null,
+        status: 'Logged In'
+      };
+
+      state.staffActivityLogs.unshift(newActivityLog);
+      saveToStorage(STORAGE_KEYS.STAFF_ACTIVITY_LOGS, state.staffActivityLogs);
+
+      state.staffSession = {
+        username: matchedStaff.username,
+        role: matchedStaff.role || 'Hospital Staff',
+        loginDate: todayIso,
+        sessionLogId
+      };
+      saveToStorage(STORAGE_KEYS.STAFF_SESSION, state.staffSession);
+
+      document.getElementById('staffLoginForm').reset();
+      document.getElementById('staffPortalRouteConfirm').value = '#staff';
+      if (errorBox) errorBox.classList.add('hidden');
+      document.getElementById('staffLoginModal').classList.add('hidden');
+
+      updateHeaderStaffButton();
+      updateAdminCounters();
+      renderAdminStaffLogsTab();
+      openStaffDashboardOverlay();
+      showToast(`Welcome ${state.staffSession.username}! Signed in on ${todayIso} at ${loginTimeStr}.`);
+    }
+
+    function logoutStaff() {
+      if (state.staffSession) {
+        const logoutTimeStr = formatDisplayTime(new Date());
+        const targetLog = state.staffActivityLogs.find(l => l.id === state.staffSession.sessionLogId) ||
+          state.staffActivityLogs.find(l => l.staffUsername === state.staffSession.username && !l.logoutTime);
+
+        if (targetLog) {
+          targetLog.logoutTime = logoutTimeStr;
+          targetLog.status = 'Logged Out';
+          saveToStorage(STORAGE_KEYS.STAFF_ACTIVITY_LOGS, state.staffActivityLogs);
+        }
+      }
+
+      state.staffSession = null;
+      state.pendingDeleteInquiryId = null;
+      localStorage.removeItem(STORAGE_KEYS.STAFF_SESSION);
+      closeStaffDashboardOverlay();
+      updateHeaderStaffButton();
+      updateAdminCounters();
+      renderAdminStaffLogsTab();
+      clearPortalHashSafely();
+      showToast('Logged out of Staff Portal. Logout time recorded.', 'info');
+    }
+
+    function updateHeaderStaffButton() {
+      const btn = document.getElementById('headerStaffBtn');
+      const btnText = document.getElementById('headerStaffBtnText');
+      if (!btn || !btnText) return;
+
+      if (state.staffSession) {
+        btnText.textContent = `Staff (${state.staffSession.username})`;
+        btn.classList.remove('bg-emerald-50/80', 'text-emerald-800', 'border-emerald-200');
+        btn.classList.add('bg-emerald-700', 'text-white', 'border-emerald-700');
+      } else {
+        btnText.textContent = 'Staff Login';
+        btn.classList.add('bg-emerald-50/80', 'text-emerald-800', 'border-emerald-200');
+        btn.classList.remove('bg-emerald-700', 'text-white', 'border-emerald-700');
+      }
+    }
+
+    function openStaffDashboardOverlay() {
+      if (!state.staffSession) {
+        openStaffLoginModal();
+        return;
+      }
+
+      const todayIso = getTodayISODate();
+      if (state.staffSession.loginDate !== todayIso) {
+        logoutStaff();
+        showToast('Your previous day staff session expired. Please sign in for today.', 'info');
+        return;
+      }
+
+      state.pendingDeleteInquiryId = null;
+      const modal = document.getElementById('staffDashboardModal');
+      const badge = document.getElementById('staffSessionBadge');
+      if (badge) {
+        badge.textContent = `${state.staffSession.username} • ${state.staffSession.role} • ${todayIso}`;
+      }
+
+      const attUserInput = document.getElementById('attendanceStaffUsername');
+      if (attUserInput) attUserInput.value = state.staffSession.username;
+
+      const attDateInput = document.getElementById('attendanceDateInput');
+      if (attDateInput) {
+        attDateInput.min = todayIso;
+        attDateInput.max = todayIso;
+        attDateInput.value = todayIso;
+      }
+
+      renderStaffDoctorTimingsList();
+      renderStaffInquiriesList();
+      renderStaffAttendanceTable();
+      updateStaffCounters();
+      switchStaffTab(state.currentStaffTab || 'timings');
+      modal?.classList.remove('hidden');
+    }
+
+    function closeStaffDashboardOverlay() {
+      state.pendingDeleteInquiryId = null;
+      document.getElementById('staffDashboardModal')?.classList.add('hidden');
+      clearPortalHashSafely();
+    }
+
+    function switchStaffTab(tabName) {
+      state.currentStaffTab = tabName;
+      state.pendingDeleteInquiryId = null;
+
+      document.querySelectorAll('.staff-tab-btn').forEach(btn => {
+        const isTarget = btn.getAttribute('data-staff-tab') === tabName;
+        if (isTarget) {
+          btn.classList.add('bg-white', 'text-emerald-800', 'border-emerald-700');
+          btn.classList.remove('text-slate-500', 'border-transparent', 'hover:text-slate-800');
+        } else {
+          btn.classList.remove('bg-white', 'text-emerald-800', 'border-emerald-700');
+          btn.classList.add('text-slate-500', 'border-transparent', 'hover:text-slate-800');
+        }
+      });
+
+      const panels = {
+        timings: document.getElementById('staffTabTimings'),
+        appointments: document.getElementById('staffTabAppointments'),
+        attendance: document.getElementById('staffTabAttendance')
+      };
+
+      Object.entries(panels).forEach(([key, el]) => {
+        if (!el) return;
+        if (key === tabName) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+
+      if (tabName === 'appointments') {
+        renderStaffInquiriesList();
+        updateStaffCounters();
+      }
+    }
+
+    function renderStaffDoctorTimingsList() {
+      const container = document.getElementById('staffDoctorTimingsList');
+      if (!container) return;
+
+      const q = state.staffDoctorSearchQuery.trim().toLowerCase();
+      const filteredDocs = state.doctors.filter(doc =>
+        !q ||
+        doc.name.toLowerCase().includes(q) ||
+        doc.speciality.toLowerCase().includes(q)
+      );
+
+      if (filteredDocs.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-sm text-slate-500">No doctors match your search filter.</div>`;
+        return;
+      }
+
+      container.innerHTML = filteredDocs.map(doc => `
+        <div class="p-4 sm:p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 hover:bg-slate-50/70 transition-colors">
+          <div class="flex items-center gap-3.5 min-w-0">
+            <div class="w-12 h-12 rounded-xl overflow-hidden border border-slate-200 shrink-0">
+              ${getDoctorAvatarSvg(doc)}
+            </div>
+            <div class="min-w-0">
+              <h4 class="font-display font-bold text-sm sm:text-base text-slate-900">${escapeHtml(doc.name)}</h4>
+              <p class="text-xs font-semibold text-teal-700">${escapeHtml(doc.speciality)}</p>
+              <p class="text-[11px] text-slate-500">${escapeHtml(doc.qualifications)}</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 lg:w-[460px] shrink-0">
+            <input
+              type="text"
+              id="staffTimingInput_${escapeHtml(doc.id)}"
+              value="${escapeHtml(doc.timings)}"
+              aria-label="OPD Timing for ${escapeHtml(doc.name)}"
+              class="flex-1 px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 focus:border-emerald-600"
+            />
+            <button
+              type="button"
+              onclick="saveDoctorTimingByStaff('${escapeHtml(doc.id)}')"
+              class="px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold shadow-2xs transition-colors shrink-0"
+            >
+              Update Timing
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function saveDoctorTimingByStaff(docId) {
+      if (!state.staffSession) {
+        showToast('Staff session required to update doctor timings.', 'error');
+        return;
+      }
+
+      const input = document.getElementById(`staffTimingInput_${docId}`);
+      const newTiming = (input?.value || '').trim();
+      if (!newTiming) {
+        showToast('Doctor OPD timing cannot be empty.', 'error');
+        return;
+      }
+
+      const targetDoc = state.doctors.find(d => d.id === docId);
+      if (!targetDoc) return;
+
+      targetDoc.timings = newTiming;
+      saveToStorage(STORAGE_KEYS.DOCTORS, state.doctors);
+
+      renderDoctors();
+      renderAdminDoctorsList();
+      showToast(`Updated OPD schedule for ${targetDoc.name}!`);
+    }
+
+    function handleStaffAttendanceSubmit(event) {
+      event.preventDefault();
+      if (!state.staffSession) {
+        showToast('Please sign in through Staff Login first.', 'error');
+        return;
+      }
+
+      const todayIso = getTodayISODate();
+      if (state.staffSession.loginDate !== todayIso) {
+        logoutStaff();
+        showToast('Session date expired. Please log in again for today.', 'error');
+        return;
+      }
+
+      const dutyDate = todayIso;
+      const status = document.getElementById('attendanceStatusSelect').value;
+      const note = document.getElementById('attendanceShiftNote').value.trim() || 'Regular Shift';
+      const checkInTime = formatDisplayTime(new Date());
+
+      const newEntry = {
+        id: 'ATT-' + Date.now(),
+        staffUsername: state.staffSession.username,
+        staffRole: state.staffSession.role,
+        dutyDate,
+        checkInTime,
+        status,
+        note
+      };
+
+      state.attendanceRecords.unshift(newEntry);
+      saveToStorage(STORAGE_KEYS.ATTENDANCE, state.attendanceRecords);
+
+      document.getElementById('attendanceShiftNote').value = '';
+      const attDateInput = document.getElementById('attendanceDateInput');
+      if (attDateInput) {
+        attDateInput.min = todayIso;
+        attDateInput.max = todayIso;
+        attDateInput.value = todayIso;
+      }
+      renderStaffAttendanceTable();
+      renderAdminStaffLogsTab();
+      updateAdminCounters();
+      showToast(`Attendance marked (${status}) for ${dutyDate} at ${checkInTime}!`);
+    }
+
+    function renderStaffAttendanceTable() {
+      const tbody = document.getElementById('staffAttendanceTableBody');
+      const countBadge = document.getElementById('staffAttendanceCountBadge');
+      if (!tbody) return;
+
+      if (countBadge) {
+        countBadge.textContent = `${state.attendanceRecords.length} ${state.attendanceRecords.length === 1 ? 'Entry' : 'Entries'}`;
+      }
+
+      if (state.attendanceRecords.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" class="py-10 px-4 text-center text-xs sm:text-sm text-slate-500">
+              No staff attendance records submitted yet. Use the form on the left to mark today's attendance.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = state.attendanceRecords.map(rec => `
+        <tr class="hover:bg-slate-50/70">
+          <td class="py-3 px-4">
+            <div class="font-mono font-bold text-slate-900 text-xs sm:text-sm">${escapeHtml(rec.staffUsername)}</div>
+            <div class="text-[11px] text-slate-500">${escapeHtml(rec.staffRole || 'Hospital Staff')}</div>
+          </td>
+          <td class="py-3 px-4 text-xs text-slate-700">
+            <span class="font-semibold">${escapeHtml(rec.dutyDate)}</span>
+            <span class="block text-slate-500">${escapeHtml(rec.checkInTime)}</span>
+          </td>
+          <td class="py-3 px-4">
+            <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800">
+              ${escapeHtml(rec.status)}
+            </span>
+          </td>
+          <td class="py-3 px-4 text-xs text-slate-600">${escapeHtml(rec.note)}</td>
+        </tr>
+      `).join('');
+    }
+
+    function generateStrongStaffPassword() {
+      const words = ['Zahara', 'Care', 'Med', 'Pulse', 'Clinic', 'Heal'];
+      const w = words[Math.floor(Math.random() * words.length)];
+      const num = Math.floor(1000 + Math.random() * 9000);
+      const pwd = `${w}@${num}`;
+      const input = document.getElementById('newStaffPassword');
+      if (input) {
+        input.value = pwd;
+        input.type = 'text';
+      }
+    }
+
+    function handleCreateAdminUser(event) {
+      event.preventDefault();
+
+      if (!state.activeSession || !state.activeSession.isMaster) {
+        showToast('Access Denied: Only Master Admin (admin_alzahara) can create new users.', 'error');
+        return;
+      }
+
+      const usernameInput = document.getElementById('newStaffUsername');
+      const passwordInput = document.getElementById('newStaffPassword');
+      const roleInput = document.getElementById('newStaffRole');
+
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+      const role = roleInput.value.trim() || 'Hospital Staff';
+
+      if (!/^[a-zA-Z0-9_]{3,24}$/.test(username)) {
+        showToast('Username must be 3–24 characters using letters, numbers, or underscores.', 'error');
+        return;
+      }
+
+      if (password.length < 6) {
+        showToast('Password must be at least 6 characters long.', 'error');
+        return;
+      }
+
+      if (
+        username.toLowerCase() === MASTER_ADMIN.username.toLowerCase() ||
+        state.adminUsers.some(u => u.username.toLowerCase() === username.toLowerCase())
+      ) {
+        showToast(`Username "${username}" already exists. Choose a unique username.`, 'error');
+        return;
+      }
+
+      const newUser = {
+        id: 'USR-' + Date.now(),
+        username,
+        password,
+        role,
+        createdAt: getTodayISODate(),
+        createdBy: MASTER_ADMIN.username
+      };
+
+      state.adminUsers.push(newUser);
+      saveToStorage(STORAGE_KEYS.ADMIN_USERS, state.adminUsers);
+
+      document.getElementById('createAdminUserForm').reset();
+      renderAdminUsersTable();
+      showToast(`Created Staff account "${username}" (Password: ${password})`);
+    }
+
+    function toggleRevealUserPassword(userId) {
+      if (!state.activeSession || !state.activeSession.isMaster) return;
+      state.revealedPasswords[userId] = !state.revealedPasswords[userId];
+      renderAdminUsersTable();
+    }
+
+    function deleteSecondaryAdminUser(userId) {
+      if (!state.activeSession || !state.activeSession.isMaster) {
+        showToast('Only Master Admin can delete staff accounts.', 'error');
+        return;
+      }
+
+      const target = state.adminUsers.find(u => u.id === userId);
+      if (!target) return;
+
+      state.adminUsers = state.adminUsers.filter(u => u.id !== userId);
+      saveToStorage(STORAGE_KEYS.ADMIN_USERS, state.adminUsers);
+      renderAdminUsersTable();
+      showToast(`Revoked access for "${target.username}".`, 'info');
+    }
+
+    function renderAdminUsersTable() {
+      const tbody = document.getElementById('adminUsersTableBody');
+      const countBadge = document.getElementById('adminUsersCountBadge');
+      if (!tbody) return;
+
+      const totalAccounts = 1 + state.adminUsers.length;
+      if (countBadge) {
+        countBadge.textContent = `${totalAccounts} ${totalAccounts === 1 ? 'Account' : 'Accounts'}`;
+      }
+
+      const masterRow = `
+        <tr class="bg-teal-50/40">
+          <td class="py-3.5 px-4">
+            <div class="font-mono font-bold text-slate-900 text-xs sm:text-sm">${escapeHtml(MASTER_ADMIN.username)}</div>
+            <span class="inline-block mt-0.5 px-2 py-0.5 rounded-md bg-teal-700 text-white text-[10px] font-bold uppercase tracking-wider">
+              Master Super-Admin
+            </span>
+          </td>
+          <td class="py-3.5 px-4">
+            <span class="font-mono text-xs text-slate-600">••••••••••••</span>
+            <span class="block text-[10px] text-teal-700 font-semibold">Protected Master Key</span>
+          </td>
+          <td class="py-3.5 px-4 text-xs text-slate-500">System Root</td>
+          <td class="py-3.5 px-4 text-right">
+            <span class="text-[11px] font-semibold text-slate-400">Permanent</span>
+          </td>
+        </tr>
+      `;
+
+      const staffRows = state.adminUsers.map(user => {
+        const isRevealed = !!state.revealedPasswords[user.id];
+        return `
+          <tr class="hover:bg-slate-50/80">
+            <td class="py-3.5 px-4">
+              <div class="font-mono font-bold text-slate-900 text-xs sm:text-sm">${escapeHtml(user.username)}</div>
+              <div class="text-xs text-slate-500">${escapeHtml(user.role)}</div>
+              <span class="inline-block mt-0.5 px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[10px] font-semibold">
+                Staff Portal (#staff)
+              </span>
+            </td>
+            <td class="py-3.5 px-4">
+              <div class="flex items-center gap-2">
+                <code class="px-2 py-0.5 rounded bg-slate-100 text-slate-800 font-mono text-xs">
+                  ${isRevealed ? escapeHtml(user.password) : '••••••••'}
+                </code>
+                <button
+                  type="button"
+                  onclick="toggleRevealUserPassword('${escapeHtml(user.id)}')"
+                  class="text-[11px] font-semibold text-teal-700 hover:text-teal-900"
+                >
+                  ${isRevealed ? 'Hide' : 'Show'}
+                </button>
+              </div>
+            </td>
+            <td class="py-3.5 px-4 text-xs text-slate-500">${escapeHtml(user.createdAt)}</td>
+            <td class="py-3.5 px-4 text-right">
+              <button
+                type="button"
+                onclick="deleteSecondaryAdminUser('${escapeHtml(user.id)}')"
+                class="px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold transition-colors"
+              >
+                Revoke
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      tbody.innerHTML = masterRow + staffRows;
+    }
+
+    function startEditDoctor(docId) {
+      const doc = state.doctors.find(d => d.id === docId);
+      if (!doc) return;
+
+      document.getElementById('editingDoctorId').value = doc.id;
+      document.getElementById('newDocName').value = doc.name;
+      document.getElementById('newDocQual').value = doc.qualifications;
+      document.getElementById('newDocSpeciality').value = doc.speciality;
+      document.getElementById('newDocExp').value = doc.experience;
+      document.getElementById('newDocTimings').value = doc.timings;
+      document.getElementById('newDocFocus').value = doc.focus || '';
+
+      pendingDoctorPhotoData = doc.photoUrl || '';
+      const fileInput = document.getElementById('newDocPhotoFile');
+      const urlInput = document.getElementById('newDocPhotoUrl');
+      if (fileInput) fileInput.value = '';
+      if (urlInput) {
+        urlInput.value = (doc.photoUrl && !doc.photoUrl.startsWith('data:')) ? doc.photoUrl : '';
+      }
+      updateDoctorPhotoPreviewBox(pendingDoctorPhotoData);
+
+      document.getElementById('doctorFormTitle').textContent = `Edit Doctor: ${doc.name}`;
+      document.getElementById('doctorFormSubtitle').textContent = 'Update profile photo, consultation schedule, or qualifications below.';
+      document.getElementById('doctorFormSubmitBtn').textContent = 'Save Doctor Profile Changes';
+      document.getElementById('cancelEditDoctorBtn')?.classList.remove('hidden');
+
+      document.getElementById('adminAddDoctorForm')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function cancelEditDoctorMode() {
+      document.getElementById('editingDoctorId').value = '';
+      document.getElementById('adminAddDoctorForm')?.reset();
+      clearDoctorPhotoSelection();
+      document.getElementById('doctorFormTitle').textContent = 'Add Specialist Doctor';
+      document.getElementById('doctorFormSubtitle').textContent = 'New consultants appear immediately on the public "Our Doctors" directory.';
+      document.getElementById('doctorFormSubmitBtn').textContent = '+ Add Doctor to Directory';
+      document.getElementById('cancelEditDoctorBtn')?.classList.add('hidden');
+    }
+
+    function handleAdminAddDoctor(event) {
+      event.preventDefault();
+
+      const editingId = document.getElementById('editingDoctorId')?.value || '';
+      const name = document.getElementById('newDocName').value.trim();
+      const qualifications = document.getElementById('newDocQual').value.trim();
+      const speciality = document.getElementById('newDocSpeciality').value;
+      const experience = parseInt(document.getElementById('newDocExp').value, 10) || 10;
+      const timings = document.getElementById('newDocTimings').value.trim();
+      const focus = document.getElementById('newDocFocus').value.trim() || speciality;
+
+      if (!name || !qualifications || !speciality || !timings) return;
+
+      if (editingId) {
+        const existingDoc = state.doctors.find(d => d.id === editingId);
+        if (existingDoc) {
+          existingDoc.name = name;
+          existingDoc.qualifications = qualifications;
+          existingDoc.speciality = speciality;
+          existingDoc.experience = experience;
+          existingDoc.timings = timings;
+          existingDoc.focus = focus;
+          existingDoc.photoUrl = pendingDoctorPhotoData || '';
+        }
+        saveToStorage(STORAGE_KEYS.DOCTORS, state.doctors);
+        cancelEditDoctorMode();
+
+        renderDoctors();
+        renderSpecialities();
+        syncAppointmentDoctorOptions();
+        renderAdminDoctorsList();
+        renderStaffDoctorTimingsList();
+        updateAdminCounters();
+        showToast(`${name}'s profile & photo updated!`);
+        return;
+      }
+
+      const tones = ['teal', 'sky', 'emerald', 'indigo', 'rose', 'amber'];
+      const newDoc = {
+        id: 'doc-' + Date.now(),
+        name,
+        qualifications,
+        speciality,
+        experience,
+        timings,
+        focus,
+        photoUrl: pendingDoctorPhotoData || '',
+        avatarTone: tones[state.doctors.length % tones.length],
+        gender: name.toLowerCase().includes('ayesha') || name.toLowerCase().includes('fatima') || name.toLowerCase().includes('priya') || name.toLowerCase().includes('meera') || name.toLowerCase().includes('layla') ? 'female' : 'male'
+      };
+
+      state.doctors.push(newDoc);
+      saveToStorage(STORAGE_KEYS.DOCTORS, state.doctors);
+
+      cancelEditDoctorMode();
+      renderDoctors();
+      renderSpecialities();
+      syncAppointmentDoctorOptions();
+      renderAdminDoctorsList();
+      renderStaffDoctorTimingsList();
+      updateAdminCounters();
+      showToast(`${name} added to Al-Zahara Hospital directory!`);
+    }
+
+    function handleAdminDeleteDoctor(docId) {
+      const target = state.doctors.find(d => d.id === docId);
+      if (!target) return;
+
+      if (document.getElementById('editingDoctorId')?.value === docId) {
+        cancelEditDoctorMode();
+      }
+
+      state.doctors = state.doctors.filter(d => d.id !== docId);
+      saveToStorage(STORAGE_KEYS.DOCTORS, state.doctors);
+
+      renderDoctors();
+      renderSpecialities();
+      syncAppointmentDoctorOptions();
+      renderAdminDoctorsList();
+      renderStaffDoctorTimingsList();
+      updateAdminCounters();
+      showToast(`Removed ${target.name} from directory.`, 'info');
+    }
+
+    function renderAdminDoctorsList() {
+      const container = document.getElementById('adminDoctorsList');
+      if (!container) return;
+
+      container.innerHTML = state.doctors.map(doc => `
+        <div class="p-4 flex items-center justify-between gap-3 hover:bg-slate-50/80">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-11 h-11 rounded-xl overflow-hidden border border-slate-200 shrink-0">
+              ${getDoctorAvatarSvg(doc)}
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <h5 class="font-display font-bold text-sm text-slate-900 truncate">${escapeHtml(doc.name)}</h5>
+                ${doc.photoUrl ? `<span class="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-bold shrink-0">Photo</span>` : ''}
+              </div>
+              <p class="text-xs text-teal-700 font-semibold">${escapeHtml(doc.speciality)} • ${escapeHtml(doc.experience)} Yrs</p>
+              <p class="text-[11px] text-slate-500 truncate">${escapeHtml(doc.timings)}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button
+              type="button"
+              onclick="startEditDoctor('${escapeHtml(doc.id)}')"
+              class="px-3 py-1.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-800 text-xs font-semibold transition-colors"
+            >
+              Edit / Photo
+            </button>
+            <button
+              type="button"
+              onclick="handleAdminDeleteDoctor('${escapeHtml(doc.id)}')"
+              class="px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold transition-colors"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function handleAdminAddSpeciality(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('newSpecName').value.trim();
+      const shortDesc = document.getElementById('newSpecShortDesc').value.trim();
+      const fullDesc = document.getElementById('newSpecFullDesc').value.trim() || shortDesc;
+      const facilitiesRaw = document.getElementById('newSpecFacilities').value;
+      const facilities = facilitiesRaw.split(',').map(s => s.trim()).filter(Boolean);
+
+      if (!name || !shortDesc) return;
+
+      if (state.specialities.some(s => s.name.toLowerCase() === name.toLowerCase())) {
+        showToast('A speciality department with this name already exists.', 'error');
+        return;
+      }
+
+      const newSpec = {
+        id: 'spec-' + Date.now(),
+        name,
+        iconType: 'sparkle',
+        shortDesc,
+        fullDesc,
+        facilities: facilities.length ? facilities : ['Outpatient Clinic', 'Diagnostic Support']
+      };
+
+      state.specialities.push(newSpec);
+      saveToStorage(STORAGE_KEYS.SPECIALITIES, state.specialities);
+
+      document.getElementById('adminAddSpecialityForm').reset();
+      renderSpecialities();
+      syncSpecialitySelectOptions();
+      renderDoctorFilterPills();
+      renderAdminSpecialitiesList();
+      updateAdminCounters();
+      showToast(`Added "${name}" department!`);
+    }
+
+    function handleAdminDeleteSpeciality(specId) {
+      const target = state.specialities.find(s => s.id === specId);
+      if (!target) return;
+
+      state.specialities = state.specialities.filter(s => s.id !== specId);
+      saveToStorage(STORAGE_KEYS.SPECIALITIES, state.specialities);
+
+      if (state.selectedDoctorFilter === target.name) {
+        state.selectedDoctorFilter = 'ALL';
+      }
+
+      renderSpecialities();
+      syncSpecialitySelectOptions();
+      renderDoctorFilterPills();
+      renderDoctors();
+      renderAdminSpecialitiesList();
+      updateAdminCounters();
+      showToast(`Removed "${target.name}" department.`, 'info');
+    }
+
+    function renderAdminSpecialitiesList() {
+      const container = document.getElementById('adminSpecialitiesList');
+      if (!container) return;
+
+      container.innerHTML = state.specialities.map(spec => `
+        <div class="p-4 flex items-center justify-between gap-3 hover:bg-slate-50/80">
+          <div class="min-w-0">
+            <h5 class="font-display font-bold text-sm text-slate-900">${escapeHtml(spec.name)}</h5>
+            <p class="text-xs text-slate-500 truncate mt-0.5">${escapeHtml(spec.shortDesc)}</p>
+          </div>
+          <button
+            type="button"
+            onclick="handleAdminDeleteSpeciality('${escapeHtml(spec.id)}')"
+            class="px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold transition-colors shrink-0"
+          >
+            Remove
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function toggleInquiryStatus(inqId) {
+      if (!state.staffSession) {
+        showToast('Staff session required to manage patient appointments.', 'error');
+        return;
+      }
+      const target = state.inquiries.find(i => i.id === inqId);
+      if (!target) return;
+      target.status = target.status === 'Confirmed' ? 'Pending' : 'Confirmed';
+      state.pendingDeleteInquiryId = null;
+      saveToStorage(STORAGE_KEYS.INQUIRIES, state.inquiries);
+      renderStaffInquiriesList();
+      updateStaffCounters();
+      showToast(`Marked ${target.id} as ${target.status}.`);
+    }
+
+    function requestDeleteInquiry(inqId) {
+      if (!state.staffSession) {
+        showToast('Staff session required to delete patient appointments.', 'error');
+        return;
+      }
+      state.pendingDeleteInquiryId = inqId;
+      renderStaffInquiriesList();
+    }
+
+    function cancelDeleteInquiry() {
+      state.pendingDeleteInquiryId = null;
+      renderStaffInquiriesList();
+    }
+
+    function confirmDeleteInquiry(inqId) {
+      if (!state.staffSession) {
+        showToast('Staff session required to delete patient appointments.', 'error');
+        return;
+      }
+      const target = state.inquiries.find(i => i.id === inqId);
+      if (!target) return;
+
+      state.inquiries = state.inquiries.filter(i => i.id !== inqId);
+      state.pendingDeleteInquiryId = null;
+      saveToStorage(STORAGE_KEYS.INQUIRIES, state.inquiries);
+      renderStaffInquiriesList();
+      updateStaffCounters();
+      showToast(`Deleted appointment ${target.id} (${target.patientName}).`, 'info');
+    }
+
+    function renderStaffInquiriesList() {
+      const container = document.getElementById('staffInquiriesList');
+      if (!container) return;
+
+      if (state.inquiries.length === 0) {
+        container.innerHTML = `
+          <div class="p-10 text-center bg-slate-50 rounded-2xl border border-slate-200 text-sm text-slate-500">
+            No patient appointment requests submitted yet.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = state.inquiries.map(inq => {
+        const isConfirmed = inq.status === 'Confirmed';
+        const isConfirmingDelete = state.pendingDeleteInquiryId === inq.id;
+        return `
+          <div class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-slate-50/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="space-y-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="font-mono text-xs font-bold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded-md">
+                  ${escapeHtml(inq.id)}
+                </span>
+                <h5 class="font-display font-bold text-sm sm:text-base text-slate-900">
+                  ${escapeHtml(inq.patientName)}
+                </h5>
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${
+                  isConfirmed ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                }">
+                  ${escapeHtml(inq.status)}
+                </span>
+              </div>
+              <p class="text-xs text-slate-600">
+                <strong>Phone:</strong> ${escapeHtml(inq.patientPhone)} •
+                <strong>Department:</strong> ${escapeHtml(inq.speciality)} •
+                <strong>Doctor:</strong> ${escapeHtml(inq.doctor)}
+              </p>
+              <p class="text-xs text-slate-500">
+                <strong>Preferred Date:</strong> ${escapeHtml(inq.preferredDate)} •
+                <strong>Note:</strong> ${escapeHtml(inq.message)}
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 shrink-0">
+              <button
+                type="button"
+                onclick="toggleInquiryStatus('${escapeHtml(inq.id)}')"
+                class="px-3.5 py-2 rounded-xl text-xs font-semibold border transition-colors ${
+                  isConfirmed
+                    ? 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'
+                    : 'bg-emerald-700 border-emerald-700 text-white hover:bg-emerald-800'
+                }"
+              >
+                ${isConfirmed ? 'Mark Pending' : 'Confirm Appointment'}
+              </button>
+
+              ${isConfirmingDelete
+                ? `
+                  <button
+                    type="button"
+                    onclick="confirmDeleteInquiry('${escapeHtml(inq.id)}')"
+                    class="px-3 py-2 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white transition-colors"
+                  >
+                    Confirm Delete
+                  </button>
+                  <button
+                    type="button"
+                    onclick="cancelDeleteInquiry()"
+                    class="px-3 py-2 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                `
+                : `
+                  <button
+                    type="button"
+                    onclick="requestDeleteInquiry('${escapeHtml(inq.id)}')"
+                    class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-colors"
+                  >
+                    Delete
+                  </button>
+                `
+              }
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function checkRouteHash() {
+      const currentHash = window.location.hash;
+      if (currentHash === '#admin') {
+        if (state.activeSession) {
+          openAdminDashboardOverlay();
+        } else {
+          openAdminLoginModal();
+        }
+      } else if (currentHash === '#staff') {
+        if (state.staffSession) {
+          openStaffDashboardOverlay();
+        } else {
+          openStaffLoginModal();
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeState();
+
+      const yearEl = document.getElementById('footerYear');
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+      renderContactDetails();
+      renderSpecialities();
+      syncSpecialitySelectOptions();
+      renderDoctorFilterPills();
+      renderDoctors();
+      setDefaultAppointmentDate();
+      setupAppointmentFormValidation();
+      updateHeaderAdminButton();
+      updateHeaderStaffButton();
+      updateAdminCounters();
+      updateStaffCounters();
+
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileBtn?.addEventListener('click', () => {
+        mobileMenu?.classList.toggle('hidden');
+      });
+
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu?.classList.add('hidden');
+        });
+      });
+
+      document.getElementById('doctorSearchInput')?.addEventListener('input', (e) => {
+        state.doctorSearchQuery = e.target.value;
+        renderDoctors();
+      });
+
+      document.getElementById('doctorSpecialitySelect')?.addEventListener('change', (e) => {
+        setDoctorSpecialityFilter(e.target.value);
+      });
+
+      document.getElementById('resetDoctorFilterBtn')?.addEventListener('click', resetDoctorFilters);
+
+      document.getElementById('appointmentSpeciality')?.addEventListener('change', (e) => {
+        syncAppointmentDoctorOptions(e.target.value);
+      });
+
+      document.getElementById('contactAppointmentForm')?.addEventListener('submit', handleAppointmentFormSubmit);
+      document.getElementById('adminLoginForm')?.addEventListener('submit', handleAdminLoginSubmit);
+      document.getElementById('createAdminUserForm')?.addEventListener('submit', handleCreateAdminUser);
+      document.getElementById('masterEditContactForm')?.addEventListener('submit', handleSaveContactInfo);
+      document.getElementById('adminAddDoctorForm')?.addEventListener('submit', handleAdminAddDoctor);
+      document.getElementById('adminAddSpecialityForm')?.addEventListener('submit', handleAdminAddSpeciality);
+
+      document.getElementById('staffLoginForm')?.addEventListener('submit', handleStaffLoginSubmit);
+      document.getElementById('staffMarkAttendanceForm')?.addEventListener('submit', handleStaffAttendanceSubmit);
+      document.getElementById('staffDoctorSearchInput')?.addEventListener('input', (e) => {
+        state.staffDoctorSearchQuery = e.target.value;
+        renderStaffDoctorTimingsList();
+      });
+
+      document.getElementById('adminStaffLogDateFilter')?.addEventListener('change', (e) => {
+        state.adminStaffLogDateFilter = e.target.value;
+        renderAdminStaffLogsTab();
+      });
+      document.getElementById('adminStaffLogUserFilter')?.addEventListener('change', (e) => {
+        state.adminStaffLogUserFilter = e.target.value;
+        renderAdminStaffLogsTab();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closePhotoLightbox();
+          closeSpecialityModal();
+          closeAdminLoginModal();
+          closeStaffLoginModal();
+        }
+      });
+
+      checkRouteHash();
+      window.addEventListener('hashchange', checkRouteHash);
+    });
+  </script>
+</body>
+</html>
